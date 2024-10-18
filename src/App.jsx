@@ -8,7 +8,7 @@ import { Navbar } from "./components/navbar/Navbar";
 function App() {
   return (
     <>
-      <Navbar />
+      {<Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />

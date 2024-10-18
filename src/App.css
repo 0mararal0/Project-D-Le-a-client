@@ -4,3 +4,21 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "signika";
+  src: url("./assets/fonts/MerriweatherSans-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --dLeña-azul: #116d6e;
+  --dLeña-naranja: #e3651d;
+  --dLeña-rosa: #ffb0b0;
+  --dLeña-gris: #efecec;
+}
