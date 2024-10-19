@@ -11,6 +11,12 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "ClickerScript";
+  src: url("./assets/fonts/ClickerScript-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   margin: 0;
   padding: 0;

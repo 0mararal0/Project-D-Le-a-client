@@ -86,7 +86,7 @@ export const Navbar = () => {
         >
           <Container maxWidth="lg">
             <Toolbar disableGutters>
-              <Link>
+              <Link to={"/"}>
                 <Avatar
                   src={Logo}
                   sx={{ display: { xs: "none", md: "flex" } }}
