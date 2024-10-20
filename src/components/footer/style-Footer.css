@@ -2,34 +2,36 @@
   width: 100%;
   height: 150px;
   color: white;
-  position: absolute;
-  bottom: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .container-footer > img {
-  height: 100%;
+  height: 150px;
   width: 100%;
   object-fit: cover;
   filter: brightness(0.25);
   position: absolute;
-  top: 0;
-  z-index: -1;
+
+  z-index: 0;
 }
 .container-footer > h5 {
   font-family: "logofont";
   font-size: 2.5rem;
   font-weight: lighter;
   margin-top: 20px;
+  z-index: 1;
 }
 .container-footer > h6 {
   font-family: "ClickerScript";
   font-size: 1.5rem;
   font-weight: lighter;
   margin-bottom: 10px;
+  z-index: 1;
 }
 .container-footer > p {
   font-family: "signika";
   font-size: 0.7rem;
+  z-index: 1;
 }

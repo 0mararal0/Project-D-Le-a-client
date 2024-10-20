@@ -1,15 +1,18 @@
-import React from "react";
 import img1 from "../../../assets/images/bebidaHome.webp";
 import "./style-Drink.css";
 import { Footer } from "../../../components/footer/Footer";
+import { ProductCard } from "../../../components/card/ProductCard";
 export const Drink = () => {
   return (
-    <div>
+    <div className="container-drink">
       <section className="seccion1-drink">
-        <h2>Nuestros Brebajes</h2>
+        <h2>Bebidas</h2>
         <img src={img1} alt="" />
+        <ProductCard />
       </section>
-      <Footer />
+      <div className="footer-drink">
+        <Footer />
+      </div>
     </div>
   );
 };

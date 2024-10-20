@@ -57,7 +57,18 @@ export const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (e) => {
+    console.log("ddd", e);
+    if (e === "Sobre Nosotros") {
+      navigate("/about");
+    }
+    if (e === "Contacto") {
+      navigate("/contact");
+    }
+    if (e === "Haz tu pedido") {
+      navigate("/order");
+    }
+
     setAnchorElNav(null);
   };
 
@@ -82,7 +93,10 @@ export const Navbar = () => {
       >
         <AppBar
           position="static"
-          style={{ backgroundColor: "transparent", boxShadow: "none" }}
+          style={{
+            backgroundColor: "transparent",
+            boxShadow: "none",
+          }}
         >
           <Container maxWidth="lg">
             <Toolbar disableGutters>
@@ -169,7 +183,7 @@ export const Navbar = () => {
                 {pages.map((page) => (
                   <Button
                     key={page}
-                    onClick={handleCloseNavMenu}
+                    onClick={() => handleCloseNavMenu(page)}
                     sx={{ my: 2, color: "white", display: "block" }}
                   >
                     {page}

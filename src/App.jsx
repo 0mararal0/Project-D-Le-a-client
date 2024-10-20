@@ -9,6 +9,9 @@ import { Paste } from "./pages/product/paste/Paste";
 import { Salad } from "./pages/product/salad/Salad";
 import { Dessert } from "./pages/product/dessert/Dessert";
 import { Drink } from "./pages/product/drink/Drink";
+import { About } from "./pages/About";
+import { Contact } from "./pages/Contact";
+import { Order } from "./pages/Order";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/order" element={<Order />} />
           <Route path="/product/pizza" element={<Pizza />} />
           <Route path="/product/paste" element={<Paste />} />
           <Route path="/product/salad" element={<Salad />} />

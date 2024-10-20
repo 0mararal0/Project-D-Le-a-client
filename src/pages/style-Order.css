@@ -1,0 +1,25 @@
+.container-order {
+  background-image: url("../assets/images/fondo1.jpg");
+  background-size: cover;
+
+  padding-top: 120px;
+}
+.container-order > h4 {
+  font-size: 5rem;
+  color: white;
+  font-family: "logofont";
+  font-weight: lighter;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.card-order {
+  border: 16px solid white;
+  margin-block: 30px;
+  box-shadow: 1px 1px 20px white !important;
+  width: 200px;
+}
+@media (max-width: 899px) {
+  .container-order > h4 {
+    font-size: 3rem;
+  }
+}
