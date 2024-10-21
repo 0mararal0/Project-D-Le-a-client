@@ -1,0 +1,40 @@
+.container-product {
+  /* background-color: rgb(70, 29, 1); */
+  background-image: url(../../assets/images/fondo-admin.jpg);
+  background-size: cover;
+  padding-bottom: 170;
+  padding-top: 120px;
+
+  min-height: 100dvh;
+}
+.container-product > h4 {
+  font-size: 4.5rem;
+  color: white;
+  font-family: "logofont";
+  font-weight: lighter;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.button-product {
+  padding: 1px 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+.buttonAdd-product {
+  padding: 8px 20px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.buttonAdd-product:hover {
+  background-color: #b8001f;
+  color: white;
+  transition: 0.4s;
+}
+@media (max-width: 899px) {
+  .container-product > h4 {
+    font-size: 2rem;
+  }
+}

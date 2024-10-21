@@ -1,0 +1,28 @@
+.container-user {
+  /* background-color: rgb(70, 29, 1); */
+  background-image: url(../../assets/images/fondo-admin.jpg);
+  background-size: cover;
+  padding-bottom: 170;
+  padding-top: 120px;
+
+  min-height: 100dvh;
+}
+.container-user > h4 {
+  font-size: 4.5rem;
+  color: white;
+  font-family: "logofont";
+  font-weight: lighter;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.button-users {
+  padding: 1px 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+@media (max-width: 899px) {
+  .container-user > h4 {
+    font-size: 2rem;
+  }
+}

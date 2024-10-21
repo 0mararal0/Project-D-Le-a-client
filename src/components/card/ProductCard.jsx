@@ -1,10 +1,11 @@
 import "./style-ProductCard.css";
+import { AddProductContext } from "../../context/addproduct.context";
 import { unstable_useNumberInput as useNumberInput } from "@mui/base/unstable_useNumberInput";
 import { styled } from "@mui/system";
 import { unstable_useForkRef as useForkRef } from "@mui/utils";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
-import { forwardRef, useState } from "react";
+import { forwardRef, useContext, useState } from "react";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
@@ -34,8 +35,37 @@ const CompactNumberInput = forwardRef(function CompactNumberInput(props, ref) {
   );
 });
 
-export const ProductCard = () => {
+export const ProductCard = ({ title, ingredients, price }) => {
   const [value, setValue] = useState(null);
+  const { toggleProduct, isTrue } = useContext(AddProductContext);
+  const handleAdd = (e) => {
+    console.log(e);
+    toggleProduct();
+    if (localStorage.getItem("order")) {
+      const retrievedOrderString = localStorage.getItem("order");
+      const retrievedOrder = JSON.parse(retrievedOrderString);
+      const order = {
+        title,
+        price,
+        quantity: value,
+      };
+      const addOrder = [...retrievedOrder, order];
+      const addOrderString = JSON.stringify(addOrder);
+      localStorage.setItem("order", [addOrderString]);
+      console.log(retrievedOrder);
+    } else {
+      const order = [
+        {
+          title,
+          price,
+          quantity: value,
+        },
+      ];
+      const orderString = JSON.stringify(order);
+      localStorage.setItem("order", [orderString]);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
@@ -44,8 +74,11 @@ export const ProductCard = () => {
         spacing={{ xs: 1, md: 0 }}
       >
         <Grid className="text-productCard" size={{ xs: 12, md: 7 }}>
-          <h4>Título</h4>
-          <p>Descripción</p>
+          <div className="price-productCard">
+            <h4>{title}</h4>
+            <p>{price}€</p>
+          </div>
+          <p>{ingredients}</p>
         </Grid>
         <Grid
           size={{ xs: 12, md: 5 }}
@@ -68,7 +101,11 @@ export const ProductCard = () => {
             <p className="count-productCard">{value ?? "0 "}</p>
           </Layout>
 
-          <Button variant="outlined" className="button-productCard">
+          <Button
+            variant="outlined"
+            className="button-productCard"
+            onClick={handleAdd}
+          >
             Añadir
           </Button>
         </Grid>

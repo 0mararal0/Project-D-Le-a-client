@@ -1,4 +1,3 @@
-import React from "react";
 import "./style-Order.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,10 +11,26 @@ import ensaladaOrder from "../assets/images/ensalada-order.jpg";
 import bebidaOrder from "../assets/images/bebida-order.jpg";
 import { Container } from "@mui/material";
 import { Footer } from "../components/footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 export const Order = () => {
-  const handlePizza = (e) => {
-    console.log(e.target.id);
+  const navigate = useNavigate();
+  const handleSection = (e) => {
+    if (e.target.id === "pizza") {
+      navigate("/product/pizza");
+    }
+    if (e.target.id === "pasta") {
+      navigate("/product/paste");
+    }
+    if (e.target.id === "ensalada") {
+      navigate("/product/salad");
+    }
+    if (e.target.id === "postre") {
+      navigate("/product/dessert");
+    }
+    if (e.target.id === "bebida") {
+      navigate("/product/drink");
+    }
   };
   return (
     <section className="container-order">
@@ -30,13 +45,13 @@ export const Order = () => {
         }}
       >
         <Card className="card-order">
-          <CardActionArea onClick={handlePizza}>
+          <CardActionArea onClick={handleSection}>
             <CardMedia
               id="pizza"
               component="img"
               height="140"
               image={pizzaOrder}
-              alt="green iguana"
+              alt="pizza"
             />
             <CardContent>
               <Typography
@@ -55,12 +70,13 @@ export const Order = () => {
           </CardActionArea>
         </Card>
         <Card className="card-order">
-          <CardActionArea>
+          <CardActionArea onClick={handleSection}>
             <CardMedia
+              id="pasta"
               component="img"
               height="140"
               image={pastaOrder}
-              alt="green iguana"
+              alt="pasta"
             />
             <CardContent>
               <Typography
@@ -79,12 +95,13 @@ export const Order = () => {
           </CardActionArea>
         </Card>
         <Card className="card-order">
-          <CardActionArea>
+          <CardActionArea onClick={handleSection}>
             <CardMedia
+              id="ensalada"
               component="img"
               height="140"
               image={ensaladaOrder}
-              alt="green iguana"
+              alt="ensalada"
             />
             <CardContent>
               <Typography
@@ -103,12 +120,13 @@ export const Order = () => {
           </CardActionArea>
         </Card>
         <Card className="card-order">
-          <CardActionArea>
+          <CardActionArea onClick={handleSection}>
             <CardMedia
+              id="postre"
               component="img"
               height="140"
               image={postreOrder}
-              alt="green iguana"
+              alt="postre"
             />
             <CardContent>
               <Typography
@@ -127,12 +145,13 @@ export const Order = () => {
           </CardActionArea>
         </Card>
         <Card className="card-order">
-          <CardActionArea>
+          <CardActionArea onClick={handleSection}>
             <CardMedia
+              id="bebida"
               component="img"
               height="140"
               image={bebidaOrder}
-              alt="green iguana"
+              alt="bebida"
             />
             <CardContent>
               <Typography

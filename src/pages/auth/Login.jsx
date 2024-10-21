@@ -78,7 +78,7 @@ export const Login = () => {
 
         await authenticateUser();
 
-        navigate("/private-page-example");
+        navigate("/");
       } catch (error) {
         console.log(error);
         if (error.response.status === 400) {

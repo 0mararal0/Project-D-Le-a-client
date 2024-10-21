@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import { useContext, useState } from "react";
+import { AddProductContext } from "../../context/addproduct.context";
+import { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -35,7 +36,20 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [settings, setSettings] = useState([]);
+
+  const { count } = useContext(AddProductContext);
+  console.log("navbar", count);
+
   const navigate = useNavigate();
+  /* const productString = localStorage.getItem("order");
+  useEffect(() => {
+    if (productString) {
+      const product = JSON.parse(productString);
+      setValueProduct(product.length);
+    }
+  }, [productString]); */
+
   const { isLoggedIn, authenticateUser, isAdmin } = useContext(AuthContext);
 
   const handleLogout = async () => {
@@ -57,9 +71,8 @@ export const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (e) => {
-    console.log("ddd", e);
-    if (e === "Sobre Nosotros") {
+  const handleCloseNavMenu = () => {
+    /* if (e === "Sobre Nosotros") {
       navigate("/about");
     }
     if (e === "Contacto") {
@@ -67,7 +80,7 @@ export const Navbar = () => {
     }
     if (e === "Haz tu pedido") {
       navigate("/order");
-    }
+    } */
 
     setAnchorElNav(null);
   };
@@ -75,10 +88,17 @@ export const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
+  /*  if (!isLoggedIn) {
+    setSettings([
+      { name: "Login", dir: "/login" },
+      { name: "Regístrate", dir: "/signup" },
+    ]);
+  } */
   return (
     <>
-      <nav>
+      {/* <nav>
         <Link to="/">Home</Link>
         {!isLoggedIn && <Link to="/signup">Registro</Link>}
         {!isLoggedIn && <Link to="/login">Acceso</Link>}
@@ -86,7 +106,7 @@ export const Navbar = () => {
         {isLoggedIn && <Link onClick={handleLogout}>Cerrar sesión</Link>}
         {isLoggedIn && isAdmin && <span>usuario admin</span>}
         {isLoggedIn && !isAdmin && <span>usuario normal</span>}
-      </nav>
+      </nav> */}
       <Container
         sx={{ position: "fixed", top: 20, left: 0, right: 0 }}
         /* className="container-navBar" */
@@ -134,13 +154,61 @@ export const Navbar = () => {
                   onClose={handleCloseNavMenu}
                   sx={{ display: { xs: "block", md: "none" } }}
                 >
-                  {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  {/*  {pages.map((page) => ( */}
+
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    {" "}
+                    <Typography sx={{ textAlign: "center" }}>
+                      {" "}
+                      <Link
+                        to={"/order"}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        Haz tu pedido{" "}
+                      </Link>
+                    </Typography>{" "}
+                  </MenuItem>
+
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    {" "}
+                    <Typography sx={{ textAlign: "center" }}>
+                      {" "}
+                      <Link
+                        to={"/about"}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        Sobre Nosotros{" "}
+                      </Link>
+                    </Typography>{" "}
+                  </MenuItem>
+
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    {" "}
+                    <Typography sx={{ textAlign: "center" }}>
+                      {" "}
+                      <Link
+                        to={"/contact"}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        Contacto{" "}
+                      </Link>
+                    </Typography>{" "}
+                  </MenuItem>
+
+                  {isLoggedIn && isAdmin && (
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      {" "}
                       <Typography sx={{ textAlign: "center" }}>
-                        {page}
-                      </Typography>
+                        {" "}
+                        <Link
+                          to={"/admin/home"}
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          Panel Administrador{" "}
+                        </Link>
+                      </Typography>{" "}
                     </MenuItem>
-                  ))}
+                  )}
                 </Menu>
               </Box>
               <Typography
@@ -180,15 +248,57 @@ export const Navbar = () => {
                 D-Leña
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                {pages.map((page) => (
+                {/*  {pages.map((page) => ( */}
+
+                <Button
+                  onClick={() => handleCloseNavMenu()}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  <Link
+                    to={"/order"}
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Haz tu pedido
+                  </Link>
+                </Button>
+
+                <Button
+                  onClick={() => handleCloseNavMenu()}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  <Link
+                    to={"/about"}
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Sobre Nosotros
+                  </Link>
+                </Button>
+
+                <Button
+                  onClick={() => handleCloseNavMenu()}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  <Link
+                    to={"/contact"}
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Contacto
+                  </Link>
+                </Button>
+
+                {isLoggedIn && isAdmin && (
                   <Button
-                    key={page}
-                    onClick={() => handleCloseNavMenu(page)}
+                    onClick={() => handleCloseNavMenu()}
                     sx={{ my: 2, color: "white", display: "block" }}
                   >
-                    {page}
+                    <Link
+                      to={"/admin/home"}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Panel Administrador
+                    </Link>
                   </Button>
-                ))}
+                )}
               </Box>
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
@@ -218,17 +328,100 @@ export const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  {/*  {settings.map((setting) => (
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                       <Typography sx={{ textAlign: "center" }}>
-                        {setting}
+                        {setting.name}
                       </Typography>
                     </MenuItem>
-                  ))}
+                  ))} */}
+                  {!isLoggedIn && (
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        to="/login"
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          Login
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {!isLoggedIn && (
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        to="/signup"
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          Registro
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {isLoggedIn && (
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        to="/user/profile"
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          Perfil
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {isLoggedIn && (
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        to="/user/history"
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          Historial
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {isLoggedIn && (
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        to="/user/sumary"
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          Pedido
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {isLoggedIn && (
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        onClick={handleLogout}
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          LogOut
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+
+                  {/* {isLoggedIn && (
+                      <Link
+                        style={{ textDecoration: "none", color: "black" }}
+                        to="/signup"
+                      >
+                        <Typography sx={{ textAlign: "center" }}>
+                          Perfil
+                        </Typography>
+                      </Link>
+                    )} */}
                 </Menu>
               </Box>
               <IconButton aria-label="cart">
-                <StyledBadge badgeContent={1} color="secondary">
+                <StyledBadge badgeContent={count} color="secondary">
                   <ShoppingCartIcon style={{ color: "white" }} />
                 </StyledBadge>
               </IconButton>

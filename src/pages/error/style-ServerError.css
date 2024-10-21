@@ -1,0 +1,27 @@
+.container-serverError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding-top: 200px;
+  background-color: black;
+  min-height: 100dvh;
+}
+.container-serverError > h4 {
+  font-size: 6rem;
+  font-family: "logofont";
+  font-weight: lighter;
+}
+.container-serverError > h6 {
+  font-size: 6rem;
+  font-family: "logofont";
+  font-weight: lighter;
+}
+.container-serverError > p {
+  font-size: 2rem;
+  font-family: "signika";
+  font-weight: lighter;
+  border: 2px solid #b8001f;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
