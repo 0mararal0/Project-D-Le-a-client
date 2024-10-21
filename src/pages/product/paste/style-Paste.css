@@ -15,3 +15,16 @@
   text-align: center;
   margin-bottom: 100px;
 }
+.button-paste {
+  position: fixed;
+  bottom: 200px;
+  right: 50px;
+  margin: 15px;
+  display: flex;
+}
+@media (max-width: 1100px) {
+  .button-paste {
+    display: flex;
+    flex-direction: column;
+  }
+}

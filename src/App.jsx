@@ -25,14 +25,14 @@ import PrivateAdmin from "./components/auth/PrivateAdmin";
 import { Product } from "./pages/admin/Product";
 import { Statistic } from "./pages/admin/Statistic";
 import { User } from "./pages/admin/User";
+import { Legal } from "./pages/Legal";
 
 function App() {
   return (
     <>
       <div style={{ minWidth: "100dvh" }}>
-        <AddProductProvider>
-          <Navbar />
-        </AddProductProvider>
+        <Navbar />
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
@@ -40,6 +40,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/legal" element={<Legal />} />
+
           <Route path="/product/pizza" element={<Pizza />} />
           <Route path="/product/paste" element={<Paste />} />
           <Route path="/product/salad" element={<Salad />} />

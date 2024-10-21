@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { AuthContext } from "../../../context/auth.context";
+import React, { useContext, useEffect, useState } from "react";
 import "./style-Pizza.css";
 import { ProductCard } from "../../../components/card/ProductCard";
 import { Footer } from "../../../components/footer/Footer";
 import img1 from "../../../assets/images/pizza-home.jpg";
 import axios from "axios";
 import service from "../../../services/config";
-import { AddProductProvider } from "../../../context/addproduct.context";
+import {
+  AddProductContext,
+  AddProductProvider,
+} from "../../../context/addproduct.context";
 import Container from "@mui/material/Container";
+import { ButtonComponent } from "../../../components/button/ButtonComponent";
+import { useNavigate } from "react-router-dom";
 
 export const Pizza = () => {
   const [products, setProducts] = useState();
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
+  const { setSumary } = useContext(AddProductContext);
 
   const pasta = "pasta";
   useEffect(() => {
@@ -24,6 +33,15 @@ export const Pizza = () => {
       console.log(error);
     }
   };
+  const handleFinish = () => {
+    if (isLoggedIn) {
+      navigate("/user/sumary");
+    } else {
+      navigate("/login");
+    }
+  };
+  const handleAddProduct = () => navigate("/order");
+  const handleCanceled = () => navigate("/");
 
   return (
     <div>
@@ -45,6 +63,20 @@ export const Pizza = () => {
               );
             })}
         </Container>
+        <div className="button-pizza">
+          <ButtonComponent
+            textButton={"Finalizar"}
+            functionButton={handleFinish}
+          />
+          <ButtonComponent
+            textButton={"Otro Complemento"}
+            functionButton={handleAddProduct}
+          />
+          <ButtonComponent
+            textButton={"Cancelar"}
+            functionButton={handleCanceled}
+          />
+        </div>
       </section>
 
       <Footer />

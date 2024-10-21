@@ -1,13 +1,19 @@
+import { AuthContext } from "../../../context/auth.context";
+/* import { AddProductContext } from "../../context/addproduct.context"; */
 import "./style-Dessert.css";
 import { Footer } from "../../../components/footer/Footer";
 import Container from "@mui/material/Container";
 import { AddProductProvider } from "../../../context/addproduct.context";
 import { ProductCard } from "../../../components/card/ProductCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import service from "../../../services/config";
+import { ButtonComponent } from "../../../components/button/ButtonComponent";
+import { useNavigate } from "react-router-dom";
 
 export const Dessert = () => {
   const [products, setProducts] = useState();
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
 
   const postre = "postre";
   useEffect(() => {
@@ -22,6 +28,17 @@ export const Dessert = () => {
       console.log(error);
     }
   };
+  console.log(products);
+
+  const handleFinish = () => {
+    if (isLoggedIn) {
+      navigate("/user/sumary");
+    } else {
+      navigate("/login");
+    }
+  };
+  const handleAddProduct = () => navigate("/order");
+  const handleCanceled = () => navigate("/");
   return (
     <div>
       <section className="container-dessert">
@@ -42,6 +59,20 @@ export const Dessert = () => {
               );
             })}
         </Container>
+        <div className="button-dessert">
+          <ButtonComponent
+            textButton={"Finalizar"}
+            functionButton={handleFinish}
+          />
+          <ButtonComponent
+            textButton={"Otro Complemento"}
+            functionButton={handleAddProduct}
+          />
+          <ButtonComponent
+            textButton={"Cancelar"}
+            functionButton={handleCanceled}
+          />
+        </div>
       </section>
 
       <Footer />

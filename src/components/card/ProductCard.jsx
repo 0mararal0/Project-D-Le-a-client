@@ -37,10 +37,13 @@ const CompactNumberInput = forwardRef(function CompactNumberInput(props, ref) {
 
 export const ProductCard = ({ title, ingredients, price }) => {
   const [value, setValue] = useState(null);
-  const { toggleProduct, isTrue } = useContext(AddProductContext);
+  const { count, updateContext } = useContext(AddProductContext);
+
+  console.log(count);
+
   const handleAdd = (e) => {
     console.log(e);
-    toggleProduct();
+
     if (localStorage.getItem("order")) {
       const retrievedOrderString = localStorage.getItem("order");
       const retrievedOrder = JSON.parse(retrievedOrderString);
@@ -53,6 +56,7 @@ export const ProductCard = ({ title, ingredients, price }) => {
       const addOrderString = JSON.stringify(addOrder);
       localStorage.setItem("order", [addOrderString]);
       console.log(retrievedOrder);
+      updateContext();
     } else {
       const order = [
         {
@@ -98,7 +102,7 @@ export const ProductCard = ({ title, ingredients, price }) => {
               max={5}
             />
             {/* <Pre style={{ color: "white" }}>Current value: {value ?? " "}</Pre> */}
-            <p className="count-productCard">{value ?? "0 "}</p>
+            <p className="count-productCard">{value ?? "1 "}</p>
           </Layout>
 
           <Button

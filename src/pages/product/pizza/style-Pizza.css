@@ -15,3 +15,16 @@
   text-align: center;
   margin-bottom: 100px;
 }
+.button-pizza {
+  position: fixed;
+  bottom: 200px;
+  right: 50px;
+  margin: 15px;
+  display: flex;
+}
+@media (max-width: 1100px) {
+  .button-pizza {
+    display: flex;
+    flex-direction: column;
+  }
+}

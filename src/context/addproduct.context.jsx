@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 // Crear el contexto
 export const AddProductContext = createContext();
@@ -9,14 +9,21 @@ export const AddProductProvider = ({ children }) => {
   const [count, setCount] = useState(0);
 
   // Funciones para cambiar el estado
-  const toggleProduct = () => {
-    const res = count + 1;
-    setCount(res);
+  useEffect(() => {
+    updateContext();
+  }, []);
+  const updateContext = () => {
+    const retrievedOrderString = localStorage.getItem("order");
+    const retrievedOrder = JSON.parse(retrievedOrderString);
+    if (retrievedOrder.length !== 0) {
+      setCount(retrievedOrder.length);
+    } else {
+      setCount(0);
+    }
   };
-  console.log(count);
 
   return (
-    <AddProductContext.Provider value={{ count, toggleProduct }}>
+    <AddProductContext.Provider value={{ count, updateContext }}>
       {children}
     </AddProductContext.Provider>
   );

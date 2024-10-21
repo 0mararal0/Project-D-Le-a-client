@@ -1,0 +1,22 @@
+.container-buttonComponent {
+  background-color: transparent;
+  color: white;
+  font-size: 1.2rem;
+  font-family: "signika";
+  margin: 5px 10px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: 0.3s;
+  box-shadow: 0px 0px 3px gray;
+}
+.container-buttonComponent:hover {
+  background-color: rgba(255, 255, 255, 0.702);
+  color: #b8001f;
+  border: 1px solid #b8001f;
+  transition: 0.3s;
+  box-shadow:
+    0px 0px 20px gray,
+    2px 2px 10px #b8001f;
+  scale: 1.05;
+}

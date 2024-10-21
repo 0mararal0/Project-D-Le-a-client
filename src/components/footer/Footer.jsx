@@ -8,6 +8,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Paper } from "@mui/material"; */
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   /* const [value, setValue] = useState(0); */
@@ -17,7 +18,11 @@ export const Footer = () => {
       <h6>By Alberto Marcos</h6>
       <img src={fondoFooter} alt="" />
 
-      <p>@Todos los derechos reservados</p>
+      <p>
+        <Link to={"/legal"} style={{ textDecoration: "none", color: "white" }}>
+          @Todos los derechos reservados
+        </Link>
+      </p>
 
       {/*  <Box sx={{ width: 500 }}>
         <BottomNavigation
