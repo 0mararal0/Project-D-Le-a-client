@@ -6,6 +6,7 @@ import img1 from "../../../assets/images/pizza-home.jpg";
 import axios from "axios";
 import service from "../../../services/config";
 import { AddProductProvider } from "../../../context/addproduct.context";
+import Container from "@mui/material/Container";
 
 export const Pizza = () => {
   const [products, setProducts] = useState();
@@ -25,28 +26,28 @@ export const Pizza = () => {
   };
 
   return (
-    <div className="container-pizza">
-      <section className="seccion1-pizza">
-        <h2>Pizza</h2>
-        <img src={img1} alt="" />
-        {products &&
-          products.map((elem) => {
-            return (
-              <div key={elem._id}>
-                <AddProductProvider>
-                  <ProductCard
-                    title={elem.title}
-                    ingredients={elem.ingredients}
-                    price={elem.price}
-                  />
-                </AddProductProvider>
-              </div>
-            );
-          })}
+    <div>
+      <section className="container-pizza">
+        <h4>Pizza</h4>
+        <Container>
+          {products &&
+            products.map((elem) => {
+              return (
+                <div key={elem._id}>
+                  <AddProductProvider>
+                    <ProductCard
+                      title={elem.title}
+                      ingredients={elem.ingredients}
+                      price={elem.price}
+                    />
+                  </AddProductProvider>
+                </div>
+              );
+            })}
+        </Container>
       </section>
-      <div className="footer-drink">
-        <Footer />
-      </div>
+
+      <Footer />
     </div>
   );
 };

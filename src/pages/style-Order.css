@@ -1,8 +1,9 @@
 .container-order {
   background-image: url("../assets/images/fondo1.jpg");
   background-size: cover;
-
-  padding-top: 120px;
+  padding-top: 160px;
+  min-height: calc(100dvh - 150px);
+  height: auto;
 }
 .container-order > h4 {
   font-size: 5rem;

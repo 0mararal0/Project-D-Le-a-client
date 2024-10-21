@@ -1,5 +1,5 @@
-.container-drink {
-  background-image: url("../../../assets/images/bebidaHome.webp");
+.container-dessert {
+  background-image: url("../../../assets/images/postre-home.jpg");
   background-size: cover;
   padding-top: 160px;
   padding-bottom: 20px;
@@ -7,7 +7,7 @@
   height: auto;
 }
 
-.container-drink > h4 {
+.container-dessert > h4 {
   font-size: 5rem;
   color: white;
   font-family: "logofont";

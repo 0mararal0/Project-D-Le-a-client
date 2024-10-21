@@ -68,6 +68,7 @@ export const Product = () => {
     try {
       const response = await service.post("/admin/product", addProduct);
       console.log(response);
+      products();
     } catch (error) {
       console.log(error);
     }
@@ -196,68 +197,81 @@ export const Product = () => {
           </Grid2>
         </Grid>
       </Box>
-
       <Box sx={{ flexGrow: 1 }} paddingInline={10}>
         <Grid container spacing={0}>
           <Grid item size={2}>
-            <Item>Nombre</Item>
-          </Grid>
-          <Grid item size={2}>
-            <Item>Descripción</Item>
+            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+              Nombre
+            </Item>
           </Grid>
           <Grid item size={3}>
-            <Item>Ingredientes</Item>
+            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+              Descripción
+            </Item>
+          </Grid>
+          <Grid item size={3}>
+            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+              Ingredientes
+            </Item>
           </Grid>
           <Grid item size={1}>
-            <Item>Categoría</Item>
+            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+              Cat.
+            </Item>
+          </Grid>
+          <Grid item size={1}>
+            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+              Precio
+            </Item>
           </Grid>
           <Grid item size={2}>
-            <Item>Creado</Item>
-          </Grid>
-          <Grid item size={2}>
-            <Item>Eliminar</Item>
+            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+              Eliminar
+            </Item>
           </Grid>
         </Grid>
       </Box>
-      {dataProduct &&
-        dataProduct.map((elem) => {
-          return (
-            <Box
-              key={elem._id}
-              sx={{ flexGrow: 1 }}
-              marginBlock={0.5}
-              paddingInline={10}
-            >
-              <Grid container spacing={0}>
-                <Grid item size={2}>
-                  <Item>{elem.title}</Item>
+      <div className="productList-product">
+        {dataProduct &&
+          dataProduct.map((elem) => {
+            return (
+              <Box
+                key={elem._id}
+                sx={{ flexGrow: 1 }}
+                marginBlock={0.5}
+                paddingInline={10}
+              >
+                <Grid container spacing={0}>
+                  <Grid item size={2}>
+                    <Item>{elem.title}</Item>
+                  </Grid>
+                  <Grid item size={3}>
+                    <Item>{elem.description}</Item>
+                  </Grid>
+                  <Grid item size={3}>
+                    <Item>{elem.ingredients}</Item>
+                  </Grid>
+                  <Grid item size={1}>
+                    <Item>{elem.category}</Item>
+                  </Grid>
+                  <Grid item size={1}>
+                    <Item>{elem.price}</Item>
+                  </Grid>
+                  <Grid item size={2}>
+                    <Item>
+                      <button
+                        className="button-product"
+                        onClick={() => handleDeleted(elem._id)}
+                      >
+                        Eliminar
+                      </button>
+                    </Item>
+                  </Grid>
                 </Grid>
-                <Grid item size={2}>
-                  <Item>{elem.description}</Item>
-                </Grid>
-                <Grid item size={3}>
-                  <Item>{elem.ingredients}</Item>
-                </Grid>
-                <Grid item size={1}>
-                  <Item>{elem.category}</Item>
-                </Grid>
-                <Grid item size={2}>
-                  <Item>{elem.createdAt}</Item>
-                </Grid>
-                <Grid item size={2}>
-                  <Item sx={{ backgroundColor: "red" }}>
-                    <button
-                      className="button-users"
-                      onClick={() => handleDeleted(elem._id)}
-                    >
-                      Desbloquear
-                    </button>
-                  </Item>
-                </Grid>
-              </Grid>
-            </Box>
-          );
-        })}
+              </Box>
+            );
+          })}{" "}
+      </div>{" "}
       <Footer />
     </div>
   );

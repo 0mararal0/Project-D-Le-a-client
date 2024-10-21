@@ -1,11 +1,12 @@
 .container-product {
   /* background-color: rgb(70, 29, 1); */
   background-image: url(../../assets/images/fondo-admin.jpg);
-  background-size: cover;
+  background-size: contain;
   padding-bottom: 170;
   padding-top: 120px;
 
   min-height: 100dvh;
+  height: auto;
 }
 .container-product > h4 {
   font-size: 4.5rem;
@@ -21,14 +22,12 @@
   background-color: white;
   border-radius: 10px;
 }
-.buttonAdd-product {
-  padding: 8px 20px;
-  margin: 10px;
-  background-color: white;
-  border-radius: 10px;
-  transition: 0.2s;
+.productList-product {
+  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
-.buttonAdd-product:hover {
+
+.button-product:hover {
   background-color: #b8001f;
   color: white;
   transition: 0.4s;

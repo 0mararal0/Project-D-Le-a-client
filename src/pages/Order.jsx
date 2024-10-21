@@ -33,144 +33,146 @@ export const Order = () => {
     }
   };
   return (
-    <section className="container-order">
-      <h4>¿Qué te apetece?</h4>
-      <Container
-        maxWidth="lg"
-        style={{
-          display: "flex",
-          gap: 20,
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        <Card className="card-order">
-          <CardActionArea onClick={handleSection}>
-            <CardMedia
-              id="pizza"
-              component="img"
-              height="140"
-              image={pizzaOrder}
-              alt="pizza"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={{
-                  textAlign: "center",
-                  fontFamily: "signika",
-                  fontSize: "2rem",
-                }}
-              >
-                Pizza
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card className="card-order">
-          <CardActionArea onClick={handleSection}>
-            <CardMedia
-              id="pasta"
-              component="img"
-              height="140"
-              image={pastaOrder}
-              alt="pasta"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={{
-                  textAlign: "center",
-                  fontFamily: "signika",
-                  fontSize: "2rem",
-                }}
-              >
-                Pasta
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card className="card-order">
-          <CardActionArea onClick={handleSection}>
-            <CardMedia
-              id="ensalada"
-              component="img"
-              height="140"
-              image={ensaladaOrder}
-              alt="ensalada"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={{
-                  textAlign: "center",
-                  fontFamily: "signika",
-                  fontSize: "2rem",
-                }}
-              >
-                Ensalada
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card className="card-order">
-          <CardActionArea onClick={handleSection}>
-            <CardMedia
-              id="postre"
-              component="img"
-              height="140"
-              image={postreOrder}
-              alt="postre"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={{
-                  textAlign: "center",
-                  fontFamily: "signika",
-                  fontSize: "2rem",
-                }}
-              >
-                Postre
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card className="card-order">
-          <CardActionArea onClick={handleSection}>
-            <CardMedia
-              id="bebida"
-              component="img"
-              height="140"
-              image={bebidaOrder}
-              alt="bebida"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                style={{
-                  textAlign: "center",
-                  fontFamily: "signika",
-                  fontSize: "2rem",
-                }}
-              >
-                Bebida
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Container>
+    <div>
+      <section className="container-order">
+        <h4>¿Qué te apetece?</h4>
+        <Container
+          maxWidth="lg"
+          style={{
+            display: "flex",
+            gap: 20,
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <Card className="card-order">
+            <CardActionArea onClick={handleSection}>
+              <CardMedia
+                id="pizza"
+                component="img"
+                height="140"
+                image={pizzaOrder}
+                alt="pizza"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "signika",
+                    fontSize: "2rem",
+                  }}
+                >
+                  Pizza
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card className="card-order">
+            <CardActionArea onClick={handleSection}>
+              <CardMedia
+                id="pasta"
+                component="img"
+                height="140"
+                image={pastaOrder}
+                alt="pasta"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "signika",
+                    fontSize: "2rem",
+                  }}
+                >
+                  Pasta
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card className="card-order">
+            <CardActionArea onClick={handleSection}>
+              <CardMedia
+                id="ensalada"
+                component="img"
+                height="140"
+                image={ensaladaOrder}
+                alt="ensalada"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "signika",
+                    fontSize: "2rem",
+                  }}
+                >
+                  Ensalada
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card className="card-order">
+            <CardActionArea onClick={handleSection}>
+              <CardMedia
+                id="postre"
+                component="img"
+                height="140"
+                image={postreOrder}
+                alt="postre"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "signika",
+                    fontSize: "2rem",
+                  }}
+                >
+                  Postre
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card className="card-order">
+            <CardActionArea onClick={handleSection}>
+              <CardMedia
+                id="bebida"
+                component="img"
+                height="140"
+                image={bebidaOrder}
+                alt="bebida"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "signika",
+                    fontSize: "2rem",
+                  }}
+                >
+                  Bebida
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Container>
+      </section>
       <Footer />
-    </section>
+    </div>
   );
 };

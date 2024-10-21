@@ -56,80 +56,82 @@ export const User = () => {
   }));
 
   return (
-    <div className="container-user">
-      <h4>Usuarios</h4>
-      <Box sx={{ flexGrow: 1 }} paddingInline={10}>
-        <Grid container spacing={0}>
-          <Grid item size={2}>
-            <Item>Nombre</Item>
+    <div>
+      <div className="container-user">
+        <h4>Usuarios</h4>
+        <Box sx={{ flexGrow: 1 }} paddingInline={10}>
+          <Grid container spacing={0}>
+            <Grid item size={2}>
+              <Item>Nombre</Item>
+            </Grid>
+            <Grid item size={2}>
+              <Item>Apellidos</Item>
+            </Grid>
+            <Grid item size={3}>
+              <Item>Email</Item>
+            </Grid>
+            <Grid item size={1}>
+              <Item>Teléfono</Item>
+            </Grid>
+            <Grid item size={2}>
+              <Item>Creado</Item>
+            </Grid>
+            <Grid item size={2}>
+              <Item>Estado</Item>
+            </Grid>
           </Grid>
-          <Grid item size={2}>
-            <Item>Apellidos</Item>
-          </Grid>
-          <Grid item size={3}>
-            <Item>Email</Item>
-          </Grid>
-          <Grid item size={1}>
-            <Item>Teléfono</Item>
-          </Grid>
-          <Grid item size={2}>
-            <Item>Creado</Item>
-          </Grid>
-          <Grid item size={2}>
-            <Item>Estado</Item>
-          </Grid>
-        </Grid>
-      </Box>
-      {dataUsers &&
-        dataUsers.map((elem) => {
-          return (
-            <Box
-              key={elem._id}
-              sx={{ flexGrow: 1 }}
-              marginBlock={0.5}
-              paddingInline={10}
-            >
-              <Grid container spacing={0}>
-                <Grid item size={2}>
-                  <Item>{elem.firstName}</Item>
+        </Box>
+        {dataUsers &&
+          dataUsers.map((elem) => {
+            return (
+              <Box
+                key={elem._id}
+                sx={{ flexGrow: 1 }}
+                marginBlock={0.5}
+                paddingInline={10}
+              >
+                <Grid container spacing={0}>
+                  <Grid item size={2}>
+                    <Item>{elem.firstName}</Item>
+                  </Grid>
+                  <Grid item size={2}>
+                    <Item>{elem.lastname}</Item>
+                  </Grid>
+                  <Grid item size={3}>
+                    <Item>{elem.email}</Item>
+                  </Grid>
+                  <Grid item size={1}>
+                    <Item>{elem.phone}</Item>
+                  </Grid>
+                  <Grid item size={2}>
+                    <Item>{elem.createdAt}</Item>
+                  </Grid>
+                  <Grid item size={2}>
+                    {elem.isDeleted ? (
+                      <Item sx={{ backgroundColor: "red" }}>
+                        <button
+                          className="button-users"
+                          onClick={() => handleUnlock(elem._id)}
+                        >
+                          Desbloquear
+                        </button>
+                      </Item>
+                    ) : (
+                      <Item sx={{ backgroundColor: "green" }}>
+                        <button
+                          className="button-users"
+                          onClick={() => handleBlock(elem._id)}
+                        >
+                          Bloquear
+                        </button>
+                      </Item>
+                    )}
+                  </Grid>
                 </Grid>
-                <Grid item size={2}>
-                  <Item>{elem.lastname}</Item>
-                </Grid>
-                <Grid item size={3}>
-                  <Item>{elem.email}</Item>
-                </Grid>
-                <Grid item size={1}>
-                  <Item>{elem.phone}</Item>
-                </Grid>
-                <Grid item size={2}>
-                  <Item>{elem.createdAt}</Item>
-                </Grid>
-                <Grid item size={2}>
-                  {elem.isDeleted ? (
-                    <Item sx={{ backgroundColor: "red" }}>
-                      <button
-                        className="button-users"
-                        onClick={() => handleUnlock(elem._id)}
-                      >
-                        Desbloquear
-                      </button>
-                    </Item>
-                  ) : (
-                    <Item sx={{ backgroundColor: "green" }}>
-                      <button
-                        className="button-users"
-                        onClick={() => handleBlock(elem._id)}
-                      >
-                        Bloquear
-                      </button>
-                    </Item>
-                  )}
-                </Grid>
-              </Grid>
-            </Box>
-          );
-        })}
+              </Box>
+            );
+          })}
+      </div>
       <Footer />
     </div>
   );

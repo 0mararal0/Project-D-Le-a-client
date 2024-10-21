@@ -1,11 +1,12 @@
 .container-user {
   /* background-color: rgb(70, 29, 1); */
   background-image: url(../../assets/images/fondo-admin.jpg);
-  background-size: cover;
+  background-size: contain;
   padding-bottom: 170;
   padding-top: 120px;
 
   min-height: 100dvh;
+  height: auto;
 }
 .container-user > h4 {
   font-size: 4.5rem;

@@ -1,5 +1,5 @@
-.container-drink {
-  background-image: url("../../../assets/images/bebidaHome.webp");
+.container-paste {
+  background-image: url("../../../assets//images/ensalada-home.jpg");
   background-size: cover;
   padding-top: 160px;
   padding-bottom: 20px;
@@ -7,7 +7,7 @@
   height: auto;
 }
 
-.container-drink > h4 {
+.container-paste > h4 {
   font-size: 5rem;
   color: white;
   font-family: "logofont";

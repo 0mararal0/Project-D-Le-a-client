@@ -211,11 +211,11 @@ export const Navbar = () => {
                   )}
                 </Menu>
               </Box>
+
               <Typography
                 variant="h3"
                 noWrap
                 component="a"
-                href="#app-bar-with-responsive-menu"
                 style={{ fontFamily: "logofont", fontWeight: "lighter" }}
                 sx={{
                   mr: 2,
@@ -227,8 +227,15 @@ export const Navbar = () => {
                   textDecoration: "none",
                 }}
               >
-                D-Leña
+                {" "}
+                <Link
+                  to={"/"}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  D-Leña{" "}
+                </Link>
               </Typography>
+
               <Typography
                 variant="h5"
                 noWrap
