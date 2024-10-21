@@ -45,13 +45,12 @@ export const Drink = () => {
             products.map((elem) => {
               return (
                 <div key={elem._id}>
-                  <AddProductProvider>
-                    <ProductCard
-                      title={elem.title}
-                      ingredients={elem.ingredients}
-                      price={elem.price}
-                    />
-                  </AddProductProvider>
+                  <ProductCard
+                    title={elem.title}
+                    ingredients={elem.ingredients}
+                    price={elem.price}
+                    id={elem._id}
+                  />
                 </div>
               );
             })}

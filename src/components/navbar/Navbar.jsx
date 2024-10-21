@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-
+import { AddProductContext } from "../../context/addproduct.context";
 import { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -20,7 +20,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import "./style-Navbar.css";
-import { AddProductContext } from "../../context/addproduct.context";
 
 /* const pages = ["Haz tu pedido", "Sobre Nosotros", "Contacto"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"]; */
@@ -38,8 +37,9 @@ export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [settings, setSettings] = useState([]);
-  const { count } = useContext(AddProductContext);
-  console.log(count);
+  const { finalOrder } = useContext(AddProductContext);
+
+  console.log(finalOrder);
 
   const navigate = useNavigate();
   /* const productString = localStorage.getItem("order");
@@ -429,7 +429,10 @@ export const Navbar = () => {
               </Box>
               <Link to={"/user/sumary"}>
                 <IconButton aria-label="cart">
-                  <StyledBadge badgeContent={count} color="secondary">
+                  <StyledBadge
+                    badgeContent={finalOrder ? finalOrder.length : "0"}
+                    color="secondary"
+                  >
                     <ShoppingCartIcon style={{ color: "white" }} />
                   </StyledBadge>
                 </IconButton>

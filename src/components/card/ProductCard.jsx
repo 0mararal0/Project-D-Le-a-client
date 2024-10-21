@@ -35,15 +35,11 @@ const CompactNumberInput = forwardRef(function CompactNumberInput(props, ref) {
   );
 });
 
-export const ProductCard = ({ title, ingredients, price }) => {
-  const [value, setValue] = useState(null);
-  const { count, updateContext } = useContext(AddProductContext);
+export const ProductCard = ({ title, ingredients, price, id }) => {
+  const [value, setValue] = useState(1);
+  const { updateContext } = useContext(AddProductContext);
 
-  console.log(count);
-
-  const handleAdd = (e) => {
-    console.log(e);
-
+  const handleAdd = () => {
     if (localStorage.getItem("order")) {
       const retrievedOrderString = localStorage.getItem("order");
       const retrievedOrder = JSON.parse(retrievedOrderString);
@@ -51,12 +47,12 @@ export const ProductCard = ({ title, ingredients, price }) => {
         title,
         price,
         quantity: value,
+        id,
       };
+
       const addOrder = [...retrievedOrder, order];
       const addOrderString = JSON.stringify(addOrder);
       localStorage.setItem("order", [addOrderString]);
-      console.log(retrievedOrder);
-      updateContext();
     } else {
       const order = [
         {
@@ -68,6 +64,7 @@ export const ProductCard = ({ title, ingredients, price }) => {
       const orderString = JSON.stringify(order);
       localStorage.setItem("order", [orderString]);
     }
+    updateContext();
   };
 
   return (

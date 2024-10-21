@@ -6,7 +6,8 @@ export const AddProductContext = createContext();
 // Crear el proveedor del contexto
 export const AddProductProvider = ({ children }) => {
   // Estado booleano
-  const [count, setCount] = useState(0);
+
+  const [finalOrder, setFinalOrder] = useState([]);
 
   // Funciones para cambiar el estado
   useEffect(() => {
@@ -15,15 +16,16 @@ export const AddProductProvider = ({ children }) => {
   const updateContext = () => {
     const retrievedOrderString = localStorage.getItem("order");
     const retrievedOrder = JSON.parse(retrievedOrderString);
-    if (retrievedOrder.length !== 0) {
+    setFinalOrder(retrievedOrder);
+    /* if (retrievedOrder.length !== 0) {
       setCount(retrievedOrder.length);
     } else {
       setCount(0);
-    }
+    } */
   };
 
   return (
-    <AddProductContext.Provider value={{ count, updateContext }}>
+    <AddProductContext.Provider value={{ updateContext, finalOrder }}>
       {children}
     </AddProductContext.Provider>
   );

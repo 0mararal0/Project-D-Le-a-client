@@ -20,13 +20,13 @@ export const Pizza = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const { setSumary } = useContext(AddProductContext);
 
-  const pasta = "pasta";
+  const pizza = "pizza";
   useEffect(() => {
     product();
   }, []);
   const product = async () => {
     try {
-      const response = await service.get(`/product/${pasta}`);
+      const response = await service.get(`/product/${pizza}`);
 
       setProducts(response.data);
     } catch (error) {
@@ -52,13 +52,12 @@ export const Pizza = () => {
             products.map((elem) => {
               return (
                 <div key={elem._id}>
-                  <AddProductProvider>
-                    <ProductCard
-                      title={elem.title}
-                      ingredients={elem.ingredients}
-                      price={elem.price}
-                    />
-                  </AddProductProvider>
+                  <ProductCard
+                    title={elem.title}
+                    ingredients={elem.ingredients}
+                    price={elem.price}
+                    id={elem._id}
+                  />
                 </div>
               );
             })}

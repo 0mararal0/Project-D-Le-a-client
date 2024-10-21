@@ -1,0 +1,24 @@
+.rowProduct-sumary {
+  font-size: 1.2rem;
+  font-family: "signika";
+  margin-block: 2px;
+  padding: 5px 10px;
+  color: white;
+  /* background-color: rgba(67, 66, 66, 0.744); */
+  border-bottom: 1px solid rgba(128, 128, 128, 0.385);
+}
+.rowDescription-sumary {
+  background-color: gray;
+}
+.buttonDeleted-sumary {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  transition: 0.4s;
+}
+.buttonDeleted-sumary:active {
+  transition: 0.4s;
+  box-shadow: 0px 0px 10px #b8001f;
+  border-radius: 10px;
+  padding: 2px;
+}
