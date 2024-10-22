@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AddProductProvider } from "./context/addproduct.context";
 import { HomePage } from "./pages/HomePage";
-import { Login } from "./pages/auth/login";
+import { Login } from "./pages/auth/Login";
 import { Signup } from "./pages/auth/Signup";
 import { Navbar } from "./components/navbar/Navbar";
 import { Pizza } from "./pages/product/pizza/Pizza";
