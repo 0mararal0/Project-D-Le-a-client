@@ -30,86 +30,80 @@ import { Legal } from "./pages/Legal";
 function App() {
   return (
     <>
-      <div style={{ minWidth: "100dvh" }}>
-        <Navbar />
-
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/legal" element={<Legal />} />
-
-          <Route path="/product/pizza" element={<Pizza />} />
-          <Route path="/product/paste" element={<Paste />} />
-          <Route path="/product/salad" element={<Salad />} />
-          <Route path="/product/dessert" element={<Dessert />} />
-          <Route path="/product/drink" element={<Drink />} />
-          <Route
-            path="/user/profile"
-            element={
-              <Private>
-                <EditUser />
-              </Private>
-            }
-          />
-          <Route
-            path="/user/history"
-            element={
-              <Private>
-                <History />
-              </Private>
-            }
-          />
-          <Route
-            path="/user/sumary"
-            element={
-              <Private>
-                <Sumary />
-              </Private>
-            }
-          />
-          <Route
-            path="/admin/home"
-            element={
-              <PrivateAdmin>
-                <HomeAdmin />
-              </PrivateAdmin>
-            }
-          />
-          <Route
-            path="/admin/product"
-            element={
-              <PrivateAdmin>
-                <Product />
-              </PrivateAdmin>
-            }
-          />
-          <Route
-            path="/admin/statistics"
-            element={
-              <PrivateAdmin>
-                <Statistic />
-              </PrivateAdmin>
-            }
-          />
-          <Route
-            path="/admin/user"
-            element={
-              <PrivateAdmin>
-                <User />
-              </PrivateAdmin>
-            }
-          />
-
-          <Route path="*" element={<NotFound />} />
-          <Route path="/error" element={<ServerError />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/legal" element={<Legal />} />
+        <Route path="/product/pizza" element={<Pizza />} />
+        <Route path="/product/paste" element={<Paste />} />
+        <Route path="/product/salad" element={<Salad />} />
+        <Route path="/product/dessert" element={<Dessert />} />
+        <Route path="/product/drink" element={<Drink />} />
+        <Route
+          path="/user/profile"
+          element={
+            <Private>
+              <EditUser />
+            </Private>
+          }
+        />
+        <Route
+          path="/user/history"
+          element={
+            <Private>
+              <History />
+            </Private>
+          }
+        />
+        <Route
+          path="/user/sumary"
+          element={
+            <Private>
+              <Sumary />
+            </Private>
+          }
+        />
+        <Route
+          path="/admin/home"
+          element={
+            <PrivateAdmin>
+              <HomeAdmin />
+            </PrivateAdmin>
+          }
+        />
+        <Route
+          path="/admin/product"
+          element={
+            <PrivateAdmin>
+              <Product />
+            </PrivateAdmin>
+          }
+        />
+        <Route
+          path="/admin/statistics"
+          element={
+            <PrivateAdmin>
+              <Statistic />
+            </PrivateAdmin>
+          }
+        />
+        <Route
+          path="/admin/user"
+          element={
+            <PrivateAdmin>
+              <User />
+            </PrivateAdmin>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/error" element={<ServerError />} />
+      </Routes>
     </>
   );
 }
-
 export default App;

@@ -1,20 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import "./style-Order.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
+import { Container } from "@mui/material";
 import pizzaOrder from "../assets/images/pizza-order.jpg";
 import pastaOrder from "../assets/images/pasta-order.jpg";
 import postreOrder from "../assets/images/postre-order.webp";
 import ensaladaOrder from "../assets/images/ensalada-order.jpg";
 import bebidaOrder from "../assets/images/bebida-order.jpg";
-import { Container } from "@mui/material";
 import { Footer } from "../components/footer/Footer";
-import { useNavigate } from "react-router-dom";
 
 export const Order = () => {
   const navigate = useNavigate();
+
   const handleSection = (e) => {
     if (e.target.id === "pizza") {
       navigate("/product/pizza");
@@ -32,6 +33,7 @@ export const Order = () => {
       navigate("/product/drink");
     }
   };
+
   return (
     <div>
       <section className="container-order">

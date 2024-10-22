@@ -1,6 +1,7 @@
 import "./style-Legal.css";
-import { Footer } from "../components/footer/Footer";
 import Container from "@mui/material/Container";
+import { Footer } from "../components/footer/Footer";
+
 export const Legal = () => {
   return (
     <div>
@@ -79,7 +80,6 @@ export const Legal = () => {
               consecuentes que surjan del uso de nuestra aplicación.
             </p>
           </section>
-
           <section className="section-legal">
             <h6>6. Modificaciones de los Términos</h6>
             <p>

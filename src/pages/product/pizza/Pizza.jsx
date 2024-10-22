@@ -1,38 +1,31 @@
-import { AuthContext } from "../../../context/auth.context";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./style-Pizza.css";
-import { ProductCard } from "../../../components/card/ProductCard";
-import { Footer } from "../../../components/footer/Footer";
-import img1 from "../../../assets/images/pizza-home.jpg";
-import axios from "axios";
-import service from "../../../services/config";
-import {
-  AddProductContext,
-  AddProductProvider,
-} from "../../../context/addproduct.context";
-import Container from "@mui/material/Container";
-import { ButtonComponent } from "../../../components/button/ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/auth.context";
+import service from "../../../services/config";
+import Container from "@mui/material/Container";
+import { Footer } from "../../../components/footer/Footer";
+import { ProductCard } from "../../../components/card/ProductCard";
+import { ButtonComponent } from "../../../components/button/ButtonComponent";
 
 export const Pizza = () => {
   const [products, setProducts] = useState();
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
-  const { setSumary } = useContext(AddProductContext);
 
-  const pizza = "pizza";
   useEffect(() => {
     product();
   }, []);
+
   const product = async () => {
     try {
-      const response = await service.get(`/product/${pizza}`);
-
+      const response = await service.get("/product/pizza");
       setProducts(response.data);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
+
   const handleFinish = () => {
     if (isLoggedIn) {
       navigate("/user/sumary");
@@ -40,7 +33,9 @@ export const Pizza = () => {
       navigate("/login");
     }
   };
+
   const handleAddProduct = () => navigate("/order");
+
   const handleCanceled = () => navigate("/");
 
   return (

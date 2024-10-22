@@ -1,32 +1,31 @@
-import { AuthContext } from "../../../context/auth.context";
-import { Footer } from "../../../components/footer/Footer";
-import Container from "@mui/material/Container";
-import { AddProductProvider } from "../../../context/addproduct.context";
-import { ProductCard } from "../../../components/card/ProductCard";
 import { useContext, useEffect, useState } from "react";
-import service from "../../../services/config";
 import "./style-Salad.css";
-import { ButtonComponent } from "../../../components/button/ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/auth.context";
+import service from "../../../services/config";
+import Container from "@mui/material/Container";
+import { Footer } from "../../../components/footer/Footer";
+import { ProductCard } from "../../../components/card/ProductCard";
+import { ButtonComponent } from "../../../components/button/ButtonComponent";
 
 export const Salad = () => {
   const [products, setProducts] = useState();
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
 
-  const ensalada = "ensalada";
   useEffect(() => {
     product();
   }, []);
+
   const product = async () => {
     try {
-      const response = await service.get(`/product/${ensalada}`);
-
+      const response = await service.get("/product/ensalada");
       setProducts(response.data);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
+
   const handleFinish = () => {
     if (isLoggedIn) {
       navigate("/user/sumary");
@@ -34,8 +33,11 @@ export const Salad = () => {
       navigate("/login");
     }
   };
+
   const handleAddProduct = () => navigate("/order");
+
   const handleCanceled = () => navigate("/");
+
   return (
     <div>
       <section className="container-salad">
@@ -70,7 +72,6 @@ export const Salad = () => {
           />
         </div>
       </section>
-
       <Footer />
     </div>
   );

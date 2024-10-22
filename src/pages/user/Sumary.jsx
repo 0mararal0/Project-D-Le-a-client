@@ -1,26 +1,25 @@
-import { Box, Container, Icon } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context";
+import { AddProductContext } from "../../context/addproduct.context";
+import service from "../../services/config";
 import "./style-Sumary.css";
-
+import { Box, Container } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { ButtonComponent } from "../../components/button/ButtonComponent";
 import { Footer } from "../../components/footer/Footer";
-import { useContext, useEffect, useState } from "react";
-import { AddProductContext } from "../../context/addproduct.context";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { useNavigate } from "react-router-dom";
-import service from "../../services/config";
-import { AuthContext } from "../../context/auth.context";
 
 export const Sumary = () => {
   const [totalAmount, setTotalAmount] = useState();
   const { finalOrder, updateContext } = useContext(AddProductContext);
   const { loggedUserId } = useContext(AuthContext);
-
   const navigate = useNavigate();
+
   useEffect(() => {
     calculateTotal();
   }, []);
-  console.log(finalOrder);
+
   const handleDelete = (e) => {
     const newResult = finalOrder.filter((elem) => elem.idOrder !== e);
     const addOrderString = JSON.stringify(newResult);
@@ -32,7 +31,6 @@ export const Sumary = () => {
   const calculateTotal = () => {
     const retrievedOrderString = localStorage.getItem("order");
     const retrievedOrder = JSON.parse(retrievedOrderString);
-
     if (retrievedOrder) {
       const resultAmount = retrievedOrder.reduce((acc, elem) => {
         return acc + parseFloat(elem.price * elem.quantity);
@@ -53,10 +51,11 @@ export const Sumary = () => {
       localStorage.removeItem("order");
       updateContext();
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
+
   const handleReturn = () => {
     navigate(-1);
   };
@@ -128,7 +127,6 @@ export const Sumary = () => {
                 </Box>
               );
             })}
-
           <Box>
             <Grid container maxWidth={600}>
               <Grid size={6}></Grid>
@@ -183,7 +181,6 @@ export const Sumary = () => {
           />
         </div>
       </section>
-
       <Footer />
     </div>
   );

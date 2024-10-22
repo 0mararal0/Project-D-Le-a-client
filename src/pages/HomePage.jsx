@@ -1,14 +1,12 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import "./styleHomePage.css";
-import { Container } from "@mui/material";
+import { Footer } from "../components/footer/Footer";
 import imgHome1 from "../assets/images/home1.jpg";
 import iconPizza from "../assets/images/pizza.png";
 import iconPasta from "../assets/images/pasta.png";
 import iconEnsalada from "../assets/images/ensalada.png";
 import iconPostre from "../assets/images/postre.png";
 import iconBeber from "../assets/images/beber.png";
-import { Footer } from "../components/footer/Footer";
-import { Link } from "react-router-dom";
 
 export const HomePage = () => {
   return (

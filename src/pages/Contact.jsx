@@ -1,4 +1,3 @@
-import React from "react";
 import "./style-Contact.css";
 import { Footer } from "../components/footer/Footer";
 import Container from "@mui/material/Container";
@@ -44,22 +43,28 @@ export const Contact = () => {
               siguiente formulario y te responderemos lo antes posible.
             </p>
             <form action="">
-              <label for="name">Nombre:</label>
-              <br />
-              <input type="text" id="name" name="name" required />
+              <label>
+                Nombre:
+                <br />
+                <input type="text" id="name" name="name" required />
+              </label>
               <br></br>
-              <label for="email">Correo Electrónico:</label>
-              <br />
-              <input type="email" id="email" name="email" required />
+              <label>
+                Correo Electrónico:
+                <br />
+                <input type="email" id="email" name="email" required />
+              </label>
               <br></br>
-              <label for="message">Mensaje:</label>
-              <br />
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                required
-              ></textarea>
+              <label>
+                Mensaje:
+                <br />
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                ></textarea>
+              </label>
               <br></br>
               <input type="submit" value="Enviar"></input>
             </form>
