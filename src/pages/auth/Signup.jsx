@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./style-Signup.css";
-import service from "../../services/config";
 import { useNavigate } from "react-router-dom";
+import service from "../../services/config";
+import "./style-Signup.css";
 import {
   Box,
   Button,
@@ -19,7 +19,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Footer } from "../../components/footer/Footer";
 
 export const Signup = () => {
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,26 +27,30 @@ export const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   const handleMouseUpPassword = (event) => {
     event.preventDefault();
   };
+
   const handleMouseDownPassword2 = (event) => {
     event.preventDefault();
   };
+
   const handleMouseUpPassword2 = (event) => {
     event.preventDefault();
   };
 
   const handleSignup = async (event) => {
     event.preventDefault();
-
-    // ... contactar al backend para registrar al usuario aqui
     try {
       const newUser = {
         firstName: name,
@@ -55,19 +58,13 @@ export const Signup = () => {
         email,
         password,
       };
-      const response = await service.post("/auth/signup", newUser);
-
-      console.log(response);
-
-      // await axios.post("http://localhost:5005/api/auth/signup", newUser)
-
+      await service.post("/auth/signup", newUser);
       navigate("/login");
     } catch (error) {
-      console.log(error);
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);
       } else {
-        //! aqui deberia haber redirección a /error
+        navigate("/error");
       }
     }
   };
@@ -76,34 +73,6 @@ export const Signup = () => {
     <div>
       <div className="container-signup">
         <h4>Crea tu cuenta</h4>
-        {/* <form onSubmit={handleSignup}>
-          <label>Correo Electronico:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <br />
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-          <br />
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <br />
-          <button type="submit">Registrar</button>
-          {errorMessage && <p>{errorMessage}</p>}
-        </form> */}
         <Container maxWidth="md">
           <Box component="form" onSubmit={handleSignup} autoComplete="nope">
             <div className="input-signup">
@@ -223,7 +192,6 @@ export const Signup = () => {
                 </Grid2>
               </Grid2>
               <p style={{ color: "red" }}>{errorMessage}</p>
-
               <Button
                 type="submit"
                 variant="outlined"

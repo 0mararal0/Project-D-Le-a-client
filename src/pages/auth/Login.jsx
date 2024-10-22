@@ -1,65 +1,34 @@
-import service from "../../services/config.js";
-
-import { AuthContext } from "../../context/auth.context.jsx";
-import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Box, Button, Container, TextField } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import "./style-Login.css";
+import { AuthContext } from "../../context/auth.context.jsx";
+import service from "../../services/config.js";
+import { Box, Button, Container, TextField } from "@mui/material";
 import { Footer } from "../../components/footer/Footer.jsx";
-import { ButtonComponent } from "../../components/button/ButtonComponent.jsx";
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const { authenticateUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState({
     error: false,
-
     message: "",
   });
+  const { authenticateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regexEmail.test(email);
   };
+
   const validatePassword = (password) => {
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
     return regexPassword.test(password);
   };
 
-  /*  const handleLogin = async (e) => {
-    e.preventDefault();
-    // ... contactar al backend para validar credenciales de usuario aqui
-    try {
-      const userCredentials = {
-        email,
-        password,
-      };
-
-      // const response = await axios.post("http://localhost:5005/api/auth/login", userCredentials)
-      const response = await service.post("/auth/login", userCredentials);
-
-      console.log(response);
-
-      localStorage.setItem("authToken", response.data.authToken);
-
-      await authenticateUser();
-
-      navigate("/private-page-example");
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 400) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        //! aqui deberia haber redirección a /error
-      }
-    }
-  }; */
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateEmail(email) && validatePassword(password)) {
       setError({
         error: true,
@@ -71,19 +40,11 @@ export const Login = () => {
           email,
           password,
         };
-
-        // const response = await axios.post("http://localhost:5005/api/auth/login", userCredentials)
         const response = await service.post("/auth/login", userCredentials);
-
-        console.log(response);
-
         localStorage.setItem("authToken", response.data.authToken);
-
         await authenticateUser();
-
         navigate("/");
       } catch (error) {
-        console.log(error);
         if (error.response.status === 400) {
           setErrorMessage(error.response.data.message);
         } else {
@@ -94,7 +55,6 @@ export const Login = () => {
         error: false,
         message: "",
       });
-      console.log(email);
     }
   };
 
@@ -102,26 +62,6 @@ export const Login = () => {
     <div>
       <div className="container-login">
         <h4>Iniciar sesión</h4>
-        {/*  <form onSubmit={handleLogin}>
-          {/*  <label>Correo Electronico:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <br />
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <br />
-          <button type="submit">Acceder</button>
-          {errorMessage && <p>{errorMessage}</p>}
-        </form> */}
         <Container maxWidth="md">
           <Box component="form" onSubmit={handleSubmit}>
             <div className="input-login">
@@ -138,7 +78,6 @@ export const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-
               <TextField
                 sx={{ paddingBlock: "10px", borderColor: "white" }}
                 id="password"
@@ -156,7 +95,6 @@ export const Login = () => {
                 Si aún no estás registrado,{" "}
                 <Link to={"/signup"}>Regístrate aqui.</Link>
               </p>
-
               <Button
                 type="submit"
                 variant="outlined"
