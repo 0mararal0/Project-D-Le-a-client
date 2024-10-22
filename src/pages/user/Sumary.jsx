@@ -9,17 +9,20 @@ import { AddProductContext } from "../../context/addproduct.context";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import service from "../../services/config";
+import { AuthContext } from "../../context/auth.context";
 
 export const Sumary = () => {
   const [totalAmount, setTotalAmount] = useState();
   const { finalOrder, updateContext } = useContext(AddProductContext);
+  const { loggedUserId } = useContext(AuthContext);
+
   const navigate = useNavigate();
   useEffect(() => {
     calculateTotal();
   }, []);
   console.log(finalOrder);
   const handleDelete = (e) => {
-    const newResult = finalOrder.filter((elem) => elem.id !== e);
+    const newResult = finalOrder.filter((elem) => elem.idOrder !== e);
     const addOrderString = JSON.stringify(newResult);
     localStorage.setItem("order", [addOrderString]);
     updateContext();
@@ -27,29 +30,32 @@ export const Sumary = () => {
   };
 
   const calculateTotal = () => {
-    console.log("entra en la funcion", finalOrder);
+    const retrievedOrderString = localStorage.getItem("order");
+    const retrievedOrder = JSON.parse(retrievedOrderString);
 
-    const resultAmount = finalOrder.reduce((acc, elem) => {
-      return acc + parseFloat(elem.price * elem.quantity);
-    }, 0);
-    setTotalAmount(resultAmount);
+    if (retrievedOrder) {
+      const resultAmount = retrievedOrder.reduce((acc, elem) => {
+        return acc + parseFloat(elem.price * elem.quantity);
+      }, 0);
+      setTotalAmount(resultAmount);
+    }
   };
-   const data = {
-    product = [{}],//meter productos
-    totalAmount,
-usuario
-  }
-  const handlePlaceOrder = async() => {
-try {
-  const response = await service.post("/user/order", data)
-  console.log(response);
-  
- 
-  
-} catch (error) {
-  console.log(error);
-  
-}
+
+  const handlePlaceOrder = async () => {
+    const data = {
+      product: finalOrder.map((elem) => elem.id),
+      totalAmount,
+      usuario: loggedUserId,
+    };
+    try {
+      const response = await service.post("/user/order", data);
+      console.log(response);
+      localStorage.removeItem("order");
+      updateContext();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleReturn = () => {
     navigate(-1);
@@ -106,7 +112,7 @@ try {
                     </Grid>
                     <Grid size={1}>
                       <button
-                        onClick={() => handleDelete(elem.id)}
+                        onClick={() => handleDelete(elem.idOrder)}
                         className="buttonDeleted-sumary"
                       >
                         <DeleteIcon

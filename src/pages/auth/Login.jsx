@@ -1,9 +1,12 @@
 import service from "../../services/config.js";
 
 import { AuthContext } from "../../context/auth.context.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Container, TextField } from "@mui/material";
+import "./style-Login.css";
+import { Footer } from "../../components/footer/Footer.jsx";
+import { ButtonComponent } from "../../components/button/ButtonComponent.jsx";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -84,7 +87,7 @@ export const Login = () => {
         if (error.response.status === 400) {
           setErrorMessage(error.response.data.message);
         } else {
-          //! aqui deberia haber redirección a /error
+          navigate("/error");
         }
       }
       setError({
@@ -97,60 +100,94 @@ export const Login = () => {
 
   return (
     <div>
-      <h1>Formulario de Acceso</h1>
+      <div className="container-login">
+        <h4>Iniciar sesión</h4>
+        {/*  <form onSubmit={handleLogin}>
+          {/*  <label>Correo Electronico:</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <br />
+          <label>Contraseña:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <br />
+          <button type="submit">Acceder</button>
+          {errorMessage && <p>{errorMessage}</p>}
+        </form> */}
+        <Container maxWidth="md">
+          <Box component="form" onSubmit={handleSubmit}>
+            <div className="input-login">
+              <TextField
+                autoComplete="off"
+                sx={{ paddingBlock: "10px", borderColor: "white" }}
+                id="email"
+                label="Email"
+                type="email"
+                variant="outlined"
+                fullWidth
+                helperText={error.message}
+                error={error.error}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
-      {/*  <form onSubmit={handleLogin}>
-        {/*  <label>Correo Electronico:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        /> 
+              <TextField
+                sx={{ paddingBlock: "10px", borderColor: "white" }}
+                id="password"
+                label="Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                helperText={error.message}
+                error={error.error}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <p style={{ color: "red" }}>{errorMessage}</p>
+              <p className="linkRegister-login">
+                Si aún no estás registrado,{" "}
+                <Link to={"/signup"}>Regístrate aqui.</Link>
+              </p>
 
-        <br />
-
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <br />
-
-        <button type="submit">Acceder</button>
-
-        {errorMessage && <p>{errorMessage}</p>}
-      </form> */}
-      <Box component="form" onSubmit={handleSubmit}>
-        <TextField
-          id="email"
-          label="Email"
-          type="email"
-          variant="outlined"
-          fullWidth
-          helperText={error.message}
-          error={error.error}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          id="password"
-          label="Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          helperText={error.message}
-          error={error.error}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit" variant="outlined" sx={{ met: 2 }}>
-          Entrar
-        </Button>
-      </Box>
+              <Button
+                type="submit"
+                variant="outlined"
+                sx={{
+                  met: 2,
+                  borderRadius: "10px",
+                  color: "black",
+                  borderColor: "black",
+                }}
+              >
+                Entrar
+              </Button>
+              <Button
+                type="button"
+                variant="outlined"
+                sx={{
+                  met: 2,
+                  borderRadius: "10px",
+                  color: "black",
+                  borderColor: "black",
+                  margin: "10px",
+                }}
+                onClick={() => navigate("/")}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </Box>
+        </Container>
+      </div>
+      <Footer />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { forwardRef, useContext, useState } from "react";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
+import { v4 as uuidv4 } from "uuid";
 
 const CompactNumberInput = forwardRef(function CompactNumberInput(props, ref) {
   const {
@@ -51,7 +52,16 @@ export const ProductCard = ({ title, ingredients, price, id }) => {
       };
 
       const addOrder = [...retrievedOrder, order];
-      const addOrderString = JSON.stringify(addOrder);
+
+      const orderDisplayed = addOrder.reduce((acc, elem) => {
+        for (let i = 0; i < elem.quantity; i++) {
+          acc.push({ ...elem, quantity: 1, idOrder: uuidv4() });
+        }
+        return acc;
+      }, []);
+      console.log(orderDisplayed);
+
+      const addOrderString = JSON.stringify(orderDisplayed);
       localStorage.setItem("order", [addOrderString]);
     } else {
       const order = [
@@ -59,9 +69,17 @@ export const ProductCard = ({ title, ingredients, price, id }) => {
           title,
           price,
           quantity: value,
+          id,
         },
       ];
-      const orderString = JSON.stringify(order);
+      const orderDisplayed = order.reduce((acc, elem) => {
+        for (let i = 0; i < elem.quantity; i++) {
+          acc.push({ ...elem, quantity: 1, idOrder: uuidv4() });
+        }
+        return acc;
+      }, []);
+
+      const orderString = JSON.stringify(orderDisplayed);
       localStorage.setItem("order", [orderString]);
     }
     updateContext();
