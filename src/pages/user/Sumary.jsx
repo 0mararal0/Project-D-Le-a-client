@@ -181,7 +181,6 @@ export const Sumary = () => {
           />
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

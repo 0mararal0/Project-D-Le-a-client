@@ -1,7 +1,7 @@
 .container-order {
   background-image: url("../assets/images/fondo1.jpg");
   background-size: cover;
-  padding-top: 160px;
+  padding-top: 140px;
   min-height: calc(100dvh - 150px);
   height: auto;
 }
@@ -11,7 +11,7 @@
   font-family: "logofont";
   font-weight: lighter;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 .card-order {
   border: 16px solid white;

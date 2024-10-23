@@ -72,8 +72,6 @@ export const Pizza = () => {
           />
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

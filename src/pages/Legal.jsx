@@ -98,7 +98,6 @@ export const Legal = () => {
           </section>
         </Container>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -72,7 +72,6 @@ export const Drink = () => {
           />
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

@@ -75,7 +75,7 @@ export const Product = () => {
     console.log(addProduct);
     setName("");
     setDescription("");
-    setCategory("");
+
     setPrice(0);
     setIngredient("");
   };
@@ -185,7 +185,12 @@ export const Product = () => {
           <Grid2
             item
             size={1}
-            sx={{ backgroundColor: "white", padding: "10px 5px" }}
+            sx={{
+              backgroundColor: "white",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <button
               className="buttonAdd-product"
@@ -255,7 +260,7 @@ export const Product = () => {
                     <Item>{elem.category}</Item>
                   </Grid>
                   <Grid item size={1}>
-                    <Item>{elem.price}</Item>
+                    <Item>{elem.price}€</Item>
                   </Grid>
                   <Grid item size={2}>
                     <Item>
@@ -272,7 +277,7 @@ export const Product = () => {
             );
           })}{" "}
       </div>{" "}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

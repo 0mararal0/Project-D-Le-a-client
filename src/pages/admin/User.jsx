@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./style-user.css";
 import { Footer } from "../../components/footer/Footer";
-import { Box, Paper, styled } from "@mui/material";
+import { Box, Checkbox, Paper, styled } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import service from "../../services/config";
 
 export const User = () => {
   const [dataUsers, setDataUsers] = useState([]);
+  const [newDate, setNewDate] = useState();
 
   useEffect(() => {
     users();
@@ -19,6 +20,18 @@ export const User = () => {
       console.log(error);
     }
   };
+  console.log(dataUsers);
+
+  const formatDate = (elem) => {
+    const fecha = new Date(elem);
+
+    const dia = String(fecha.getDate()).padStart(2, "0");
+    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+    const año = String(fecha.getFullYear());
+
+    return `${dia}/${mes}/${año}`;
+  };
+
   const handleBlock = async (id) => {
     console.log(id);
     const data = { isDeleted: true };
@@ -55,6 +68,31 @@ export const User = () => {
     }),
   }));
 
+  const handleAdmin = async (id, e) => {
+    console.log(id);
+    if (e.target.checked) {
+      const data = { role: "admin" };
+
+      try {
+        const response = await service.put(`/admin/user/${id}`, data);
+        console.log(response);
+        users();
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      const data = { role: "user" };
+
+      try {
+        const response = await service.put(`/admin/user/${id}`, data);
+        console.log(response);
+        users();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div>
       <div className="container-user">
@@ -62,22 +100,74 @@ export const User = () => {
         <Box sx={{ flexGrow: 1 }} paddingInline={10}>
           <Grid container spacing={0}>
             <Grid item size={2}>
-              <Item>Nombre</Item>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                Nombre
+              </Item>
             </Grid>
             <Grid item size={2}>
-              <Item>Apellidos</Item>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                Apellidos
+              </Item>
             </Grid>
-            <Grid item size={3}>
-              <Item>Email</Item>
+            <Grid item size={2}>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                Email
+              </Item>
             </Grid>
             <Grid item size={1}>
-              <Item>Teléfono</Item>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                Teléfono
+              </Item>
             </Grid>
             <Grid item size={2}>
-              <Item>Creado</Item>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                Creado
+              </Item>
             </Grid>
             <Grid item size={2}>
-              <Item>Estado</Item>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                Estado
+              </Item>
+            </Grid>
+            <Grid item size={1}>
+              <Item
+                sx={{
+                  backgroundColor: "GrayText",
+                  color: "white",
+                }}
+              >
+                admin
+              </Item>
             </Grid>
           </Grid>
         </Box>
@@ -92,32 +182,93 @@ export const User = () => {
               >
                 <Grid container spacing={0}>
                   <Grid item size={2}>
-                    <Item>{elem.firstName}</Item>
+                    <Item
+                      sx={{
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {elem.firstName}
+                    </Item>
                   </Grid>
                   <Grid item size={2}>
-                    <Item>{elem.lastname}</Item>
+                    <Item
+                      sx={{
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {elem.lastname}
+                    </Item>
                   </Grid>
-                  <Grid item size={3}>
-                    <Item>{elem.email}</Item>
+                  <Grid item size={2}>
+                    <Item
+                      sx={{
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {elem.email}
+                    </Item>
                   </Grid>
                   <Grid item size={1}>
-                    <Item>{elem.phone}</Item>
+                    <Item
+                      sx={{
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {elem.phone}
+                    </Item>
                   </Grid>
                   <Grid item size={2}>
-                    <Item>{elem.createdAt}</Item>
+                    <Item
+                      sx={{
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {formatDate(elem.createdAt)}
+                    </Item>
                   </Grid>
                   <Grid item size={2}>
                     {elem.isDeleted ? (
-                      <Item sx={{ backgroundColor: "red" }}>
+                      <Item
+                        sx={{
+                          backgroundColor: "red",
+                          height: "50px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <button
                           className="button-users"
                           onClick={() => handleUnlock(elem._id)}
                         >
-                          Desbloquear
+                          Desbloq.
                         </button>
                       </Item>
                     ) : (
-                      <Item sx={{ backgroundColor: "green" }}>
+                      <Item
+                        sx={{
+                          backgroundColor: "green",
+                          height: "50px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <button
                           className="button-users"
                           onClick={() => handleBlock(elem._id)}
@@ -127,12 +278,23 @@ export const User = () => {
                       </Item>
                     )}
                   </Grid>
+                  <Grid item size={1}>
+                    <Item sx={{ height: "50px" }}>
+                      {elem.role === "admin" ? (
+                        <Checkbox
+                          defaultChecked
+                          onChange={(e) => handleAdmin(elem._id, e)}
+                        />
+                      ) : (
+                        <Checkbox onChange={(e) => handleAdmin(elem._id, e)} />
+                      )}
+                    </Item>
+                  </Grid>
                 </Grid>
               </Box>
             );
           })}
       </div>
-      <Footer />
     </div>
   );
 };

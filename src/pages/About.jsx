@@ -70,7 +70,6 @@ export const About = () => {
           </section>
         </Container>
       </div>
-      <Footer />
     </div>
   );
 };

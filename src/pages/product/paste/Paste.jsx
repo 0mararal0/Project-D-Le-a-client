@@ -72,7 +72,6 @@ export const Paste = () => {
           />
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

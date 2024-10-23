@@ -55,8 +55,6 @@ function AuthWrapper(props) {
     }
   };
 
-  console.log(firstName);
-
   const passedContext = {
     isLoggedIn,
     loggedUserId,

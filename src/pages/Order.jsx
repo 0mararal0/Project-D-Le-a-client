@@ -174,7 +174,6 @@ export const Order = () => {
           </Card>
         </Container>
       </section>
-      <Footer />
     </div>
   );
 };

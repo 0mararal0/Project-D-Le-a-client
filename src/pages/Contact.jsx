@@ -79,7 +79,6 @@ export const Contact = () => {
           </section>
         </Container>
       </div>
-      <Footer />
     </div>
   );
 };
