@@ -54,8 +54,6 @@ export const Navbar = () => {
     };
   }, []);
 
-  console.log(finalOrder);
-
   const navigate = useNavigate();
   /* const productString = localStorage.getItem("order");
   useEffect(() => {
@@ -65,7 +63,9 @@ export const Navbar = () => {
     }
   }, [productString]); */
 
-  const { isLoggedIn, authenticateUser, isAdmin } = useContext(AuthContext);
+  const { isLoggedIn, authenticateUser, isAdmin, photoProfile, firstName } =
+    useContext(AuthContext);
+  console.log(photoProfile);
 
   const handleLogout = async () => {
     try {
@@ -250,7 +250,7 @@ export const Navbar = () => {
                     to={"/"}
                     style={{ textDecoration: "none", color: "white" }}
                   >
-                    D-Leña{" "}
+                    <p>D-Leña</p>
                   </Link>
                 </Typography>
                 <Typography
@@ -320,135 +320,269 @@ export const Navbar = () => {
                     </Button>
                   )}
                 </Box>
-                <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Open settings">
-                    <IconButton
-                      onClick={handleOpenUserMenu}
-                      sx={{ p: 0, mr: "30px" }}
+
+                {firstName ? (
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <p
+                      style={{
+                        color: "white",
+                        fontSize: ".7rem",
+                        marginBlock: "3px",
+                      }}
                     >
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/2.jpg"
-                      />
-                    </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: "45px" }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    {/*  {settings.map((setting) => (
-                      <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                        <Typography sx={{ textAlign: "center" }}>
-                          {setting.name}
-                        </Typography>
-                      </MenuItem>
-                    ))} */}
-                    {!isLoggedIn && (
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          to="/login"
+                      Hola, {firstName}
+                    </p>
+                    <div style={{ display: "flex" }}>
+                      <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Open settings">
+                          <IconButton
+                            onClick={handleOpenUserMenu}
+                            sx={{ p: 0, mr: "30px" }}
+                          >
+                            {photoProfile ? (
+                              <Avatar alt="foto perfil" src={photoProfile} />
+                            ) : (
+                              <Avatar src="/broken-image.jpg" />
+                            )}
+                          </IconButton>
+                        </Tooltip>
+                        <Menu
+                          sx={{ mt: "45px" }}
+                          id="menu-appbar"
+                          anchorEl={anchorElUser}
+                          anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                          keepMounted
+                          transformOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                          open={Boolean(anchorElUser)}
+                          onClose={handleCloseUserMenu}
                         >
-                          <Typography sx={{ textAlign: "center" }}>
-                            Login
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    )}
-                    {!isLoggedIn && (
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          to="/signup"
+                          {!isLoggedIn && (
+                            <MenuItem onClick={handleCloseUserMenu}>
+                              <Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                                to="/login"
+                              >
+                                <Typography sx={{ textAlign: "center" }}>
+                                  Login
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          )}
+                          {!isLoggedIn && (
+                            <MenuItem onClick={handleCloseUserMenu}>
+                              <Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                                to="/signup"
+                              >
+                                <Typography sx={{ textAlign: "center" }}>
+                                  Registro
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          )}
+                          {isLoggedIn && (
+                            <MenuItem onClick={handleCloseUserMenu}>
+                              <Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                                to="/user/profile"
+                              >
+                                <Typography sx={{ textAlign: "center" }}>
+                                  Perfil
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          )}
+                          {isLoggedIn && (
+                            <MenuItem onClick={handleCloseUserMenu}>
+                              <Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                                to="/user/history"
+                              >
+                                <Typography sx={{ textAlign: "center" }}>
+                                  Historial
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          )}
+                          {isLoggedIn && (
+                            <MenuItem onClick={handleCloseUserMenu}>
+                              <Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                                to="/user/sumary"
+                              >
+                                <Typography sx={{ textAlign: "center" }}>
+                                  Pedido
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          )}
+                          {isLoggedIn && (
+                            <MenuItem onClick={handleCloseUserMenu}>
+                              <Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                                onClick={handleLogout}
+                              >
+                                <Typography sx={{ textAlign: "center" }}>
+                                  LogOut
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          )}
+                        </Menu>
+                      </Box>
+                      <Link to={"/user/sumary"}>
+                        <IconButton aria-label="cart">
+                          <StyledBadge
+                            badgeContent={finalOrder ? finalOrder.length : "0"}
+                            color="secondary"
+                          >
+                            <ShoppingCartIcon style={{ color: "white" }} />
+                          </StyledBadge>
+                        </IconButton>
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex" }}>
+                    <Box sx={{ flexGrow: 0 }}>
+                      <Tooltip title="Open settings">
+                        <IconButton
+                          onClick={handleOpenUserMenu}
+                          sx={{ p: 0, mr: "30px" }}
                         >
-                          <Typography sx={{ textAlign: "center" }}>
-                            Registro
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    )}
-                    {isLoggedIn && (
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          to="/user/profile"
+                          {photoProfile ? (
+                            <Avatar alt="foto perfil" src={photoProfile} />
+                          ) : (
+                            <Avatar src="/broken-image.jpg" />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                      <Menu
+                        sx={{ mt: "45px" }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        {!isLoggedIn && (
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            <Link
+                              style={{ textDecoration: "none", color: "black" }}
+                              to="/login"
+                            >
+                              <Typography sx={{ textAlign: "center" }}>
+                                Login
+                              </Typography>
+                            </Link>
+                          </MenuItem>
+                        )}
+                        {!isLoggedIn && (
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            <Link
+                              style={{ textDecoration: "none", color: "black" }}
+                              to="/signup"
+                            >
+                              <Typography sx={{ textAlign: "center" }}>
+                                Registro
+                              </Typography>
+                            </Link>
+                          </MenuItem>
+                        )}
+                        {isLoggedIn && (
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            <Link
+                              style={{ textDecoration: "none", color: "black" }}
+                              to="/user/profile"
+                            >
+                              <Typography sx={{ textAlign: "center" }}>
+                                Perfil
+                              </Typography>
+                            </Link>
+                          </MenuItem>
+                        )}
+                        {isLoggedIn && (
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            <Link
+                              style={{ textDecoration: "none", color: "black" }}
+                              to="/user/history"
+                            >
+                              <Typography sx={{ textAlign: "center" }}>
+                                Historial
+                              </Typography>
+                            </Link>
+                          </MenuItem>
+                        )}
+                        {isLoggedIn && (
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            <Link
+                              style={{ textDecoration: "none", color: "black" }}
+                              to="/user/sumary"
+                            >
+                              <Typography sx={{ textAlign: "center" }}>
+                                Pedido
+                              </Typography>
+                            </Link>
+                          </MenuItem>
+                        )}
+                        {isLoggedIn && (
+                          <MenuItem onClick={handleCloseUserMenu}>
+                            <Link
+                              style={{ textDecoration: "none", color: "black" }}
+                              onClick={handleLogout}
+                            >
+                              <Typography sx={{ textAlign: "center" }}>
+                                LogOut
+                              </Typography>
+                            </Link>
+                          </MenuItem>
+                        )}
+                      </Menu>
+                    </Box>
+                    <Link to={"/user/sumary"}>
+                      <IconButton aria-label="cart">
+                        <StyledBadge
+                          badgeContent={finalOrder ? finalOrder.length : "0"}
+                          color="secondary"
                         >
-                          <Typography sx={{ textAlign: "center" }}>
-                            Perfil
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    )}
-                    {isLoggedIn && (
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          to="/user/history"
-                        >
-                          <Typography sx={{ textAlign: "center" }}>
-                            Historial
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    )}
-                    {isLoggedIn && (
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          to="/user/sumary"
-                        >
-                          <Typography sx={{ textAlign: "center" }}>
-                            Pedido
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    )}
-                    {isLoggedIn && (
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          onClick={handleLogout}
-                        >
-                          <Typography sx={{ textAlign: "center" }}>
-                            LogOut
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    )}
-                    {/* {isLoggedIn && (
-                        <Link
-                          style={{ textDecoration: "none", color: "black" }}
-                          to="/signup"
-                        >
-                          <Typography sx={{ textAlign: "center" }}>
-                            Perfil
-                          </Typography>
-                        </Link>
-                      )} */}
-                  </Menu>
-                </Box>
-                <Link to={"/user/sumary"}>
-                  <IconButton aria-label="cart">
-                    <StyledBadge
-                      badgeContent={finalOrder ? finalOrder.length : "0"}
-                      color="secondary"
-                    >
-                      <ShoppingCartIcon style={{ color: "white" }} />
-                    </StyledBadge>
-                  </IconButton>
-                </Link>
+                          <ShoppingCartIcon style={{ color: "white" }} />
+                        </StyledBadge>
+                      </IconButton>
+                    </Link>
+                  </div>
+                )}
               </Toolbar>
             </Container>
           </AppBar>

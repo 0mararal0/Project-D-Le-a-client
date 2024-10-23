@@ -9,7 +9,8 @@ function AuthWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedUserId, setLoggedUserId] = useState(null);
   const [isValidatingToken, setIsValidatingToken] = useState(true);
-
+  const [photoProfile, setPhotoProfile] = useState();
+  const [firstName, setFirstName] = useState();
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -28,11 +29,13 @@ function AuthWrapper(props) {
       // })
       const response = await service.get("/auth/verify");
 
-      console.log(response);
+      console.log(response.data);
       // el token es valido
+      setIsValidatingToken(false);
       setIsLoggedIn(true);
       setLoggedUserId(response.data._id);
-      setIsValidatingToken(false);
+      setPhotoProfile(response.data.photo);
+      setFirstName(response.data.firstName);
 
       if (response.data.role === "admin") {
         setIsAdmin(true);
@@ -45,16 +48,22 @@ function AuthWrapper(props) {
       setIsLoggedIn(false);
       setLoggedUserId(null);
       setIsValidatingToken(false);
+      setFirstName(null);
+      setPhotoProfile(null);
 
       setIsAdmin(false);
     }
   };
+
+  console.log(firstName);
 
   const passedContext = {
     isLoggedIn,
     loggedUserId,
     authenticateUser,
     isAdmin,
+    photoProfile,
+    firstName,
   };
 
   if (isValidatingToken) {
