@@ -1,0 +1,67 @@
+.container-history {
+  background-image: url(../../assets/images/login-home.jpg);
+
+  padding-bottom: 170;
+  padding-top: 120px;
+  min-height: calc(100dvh - 150px);
+  height: auto;
+  color: white;
+  padding-bottom: 50px;
+}
+.container-history > h4 {
+  font-size: 4.5rem;
+
+  font-family: "logofont";
+  font-weight: lighter;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.container-ordes {
+  max-width: 1000px;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.order-history {
+  background-color: aqua;
+  width: 400px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.767);
+
+  padding: 30px 20px;
+  border: 1px solid white;
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.767);
+  color: black;
+  font-family: "signika";
+}
+.order-history > h4 {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  background-color: rgba(150, 150, 150, 0.476);
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+.order-history > h6 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+.order-history > h5 {
+  padding: 5px 0px 5px 100px;
+  font-size: 1.2rem;
+  margin-block: 15px;
+}
+.product-history {
+  display: flex;
+
+  gap: 10px;
+  margin-block: 5px;
+}
+.address-history {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-block: 5px;
+}

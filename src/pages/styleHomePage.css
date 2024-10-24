@@ -1,75 +1,78 @@
 .container-homePage {
-  box-sizing: border-box;
-  width: 100%;
-  height: 1500px;
-  background-color: black;
-  position: absolute;
-  top: 0;
-  z-index: -1;
-  margin: 0;
-  padding: 0;
+  background-image: url("../assets/images/home1.jpg");
+  background-size: cover;
+  padding-top: 160px;
+
+  min-height: calc(100dvh - 150px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+
+  /*  align-items: center; */
 }
-.img1-homePage {
-  width: 100%;
-  height: 80%;
-  object-fit: cover;
-  filter: brightness(0.4);
-}
-.title-homePage > h1 {
-  font-size: 10rem;
+
+.container-homePage > h1 {
+  font-size: 8rem;
+  color: white;
   font-family: "logofont";
   font-weight: lighter;
-  position: absolute;
-  top: 200px;
-  right: calc(50% - 284.5px);
-  color: azure;
+  text-align: center;
+  margin-bottom: 100px;
 }
+
+.icon-homePage {
+  display: flex;
+  gap: 20px;
+  width: 80%;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  margin-inline: auto;
+}
+/* .icon-homePage:hover {
+  display: flex;
+  gap: 20px;
+  width: 80%;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  box-shadow: 2px 2px 10px #b8001f;
+} */
 .iconoPizza-homePage,
 .iconoPasta-homePage,
 .iconoEnsalada-homePage,
 .iconoPostre-homePage,
 .iconoBebida-homePage {
   width: 200px;
-  height: 250px;
-  background-color: var(--dLeña-naranja);
+  height: 200px;
+  background-color: rgba(190, 190, 190, 0.694);
   text-align: center;
   padding: 10px;
   border-radius: 10px 40px;
   box-shadow:
     0px 0px 30px grey,
     5px 5px 0px grey;
+  transition: 0.3s;
 }
-.iconoPizza-homePage {
-  position: absolute;
-  top: 600px;
-  left: 100px;
+.iconoPizza-homePage:hover,
+.iconoPasta-homePage:hover,
+.iconoEnsalada-homePage:hover,
+.iconoPostre-homePage:hover,
+.iconoBebida-homePage:hover {
+  background-color: #b67f88aa;
+
+  box-shadow:
+    5px 5px 0px grey,
+    2px 2px 10px #b8001f;
+  transition: 0.4s;
 }
-.iconoPasta-homePage {
-  position: absolute;
-  top: 600px;
-  left: 350px;
-}
-.iconoEnsalada-homePage {
-  position: absolute;
-  top: 600px;
-  left: 600px;
-}
-.iconoPostre-homePage {
-  position: absolute;
-  top: 600px;
-  left: 850px;
-}
-.iconoBebida-homePage {
-  position: absolute;
-  top: 600px;
-  left: 1100px;
-}
+
 .iconoPizza-homePage > h3,
 .iconoPasta-homePage > h3,
 .iconoEnsalada-homePage > h3,
 .iconoPostre-homePage > h3,
 .iconoBebida-homePage > h3 {
-  font-size: 3rem;
+  font-size: 1.8rem;
   font-family: "signika";
   color: black;
 }
@@ -78,5 +81,61 @@
 .iconoEnsalada-homePage > img,
 .iconoPostre-homePage > img,
 .iconoBebida-homePage > img {
-  width: 80%;
+  width: 60%;
+  margin-block: 20px;
+}
+.carrusel-homePage {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+  background-color: #b8001f72;
+  padding-block: 50px;
+}
+
+.titleCarrusel-homePage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.titleCarrusel-homePage > h5 {
+  font-size: 3rem;
+  font-family: logofont;
+  font-weight: lighter;
+  color: white;
+}
+.mapLocation-homePage {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(190, 190, 190, 0.694);
+  padding-block: 50px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.map-homePage {
+  width: 400px;
+}
+.titleMap-homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titleMap-homePage > h5 {
+  font-size: 3rem;
+  font-family: logofont;
+  font-weight: lighter;
+  color: black;
+}
+.textMap-homePage {
+  height: 100%;
+  align-items: center;
+  margin-top: 50px;
+  font-size: 1.5rem;
+}
+@media (max-width: 500px) {
+  .container-homePage > h1 {
+    font-size: 6rem;
+  }
 }

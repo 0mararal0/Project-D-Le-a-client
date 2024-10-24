@@ -4,11 +4,15 @@ import { Footer } from "../../components/footer/Footer";
 import {
   Box,
   FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid2,
   InputAdornment,
   InputLabel,
   MenuItem,
   Paper,
+  Radio,
+  RadioGroup,
   Select,
   styled,
   TextField,
@@ -23,14 +27,22 @@ export const Product = () => {
   const [ingredient, setIngredient] = useState();
   const [category, setCategory] = useState();
   const [price, setPrice] = useState();
+  const [valueRadio, setValueRadio] = useState("all");
 
   useEffect(() => {
     products();
-  }, []);
+  }, [valueRadio]);
   const products = async () => {
     try {
       const response = await service.get("/admin/product");
-      setDataProduct(response.data);
+      if (valueRadio === "all") {
+        setDataProduct(response.data);
+      } else {
+        const result = response.data.filter(
+          (producto) => producto.category === valueRadio
+        );
+        setDataProduct(result);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -79,10 +91,30 @@ export const Product = () => {
     setPrice(0);
     setIngredient("");
   };
-  const prueba = (e) => {
+
+  /* const hadleRadioAll = (e) => {
     console.log(e.target.value);
   };
-  console.log("category", category);
+  const hadleRadioPizza = (e) => {
+    console.log(e.target.value);
+  };
+  const hadleRadioPasta = (e) => {
+    console.log(e.target.value);
+  };
+  const hadleRadioEnsalada = (e) => {
+    console.log(e.target.value);
+  };
+  const hadleRadioPostre = (e) => {
+    console.log(e.target.value);
+  };
+  const hadleRadioBebida = (e) => {
+    console.log(e.target.value);
+  }; */
+  const handleChange = (e) => {
+    setValueRadio(e.target.value);
+
+    console.log(e.target.value);
+  };
 
   return (
     <div className="container-product">
@@ -90,7 +122,7 @@ export const Product = () => {
       <Box
         sx={{ flexGrow: 1 }}
         paddingInline={10}
-        marginBlock={8}
+        marginBlock={5}
         component="form"
         /* onSubmit={handleSubmit} */
       >
@@ -202,6 +234,79 @@ export const Product = () => {
           </Grid2>
         </Grid>
       </Box>
+      <Box sx={{ textAlign: "center" }}>
+        <FormControl>
+          <RadioGroup
+            aria-labelledby="demo-controlled-radio-buttons-group"
+            row
+            name="controlled-radio-buttons-group"
+            value={valueRadio}
+            onChange={handleChange}
+            className="radio-product"
+          >
+            <FormControlLabel
+              value="all"
+              control={<Radio color="success" />}
+              label="Todos"
+            />
+            <FormControlLabel
+              value="pizza"
+              control={<Radio color="success" />}
+              label="Pizza"
+            />
+            <FormControlLabel
+              value="pasta"
+              control={<Radio color="success" />}
+              label="Pasta"
+            />
+            <FormControlLabel
+              value="ensalada"
+              control={<Radio color="success" />}
+              label="Ensalada"
+            />
+            <FormControlLabel
+              value="postre"
+              control={<Radio color="success" />}
+              label="Postre"
+            />
+            <FormControlLabel
+              value="bebida"
+              control={<Radio color="success" />}
+              label="Bebida"
+            />
+          </RadioGroup>
+        </FormControl>
+      </Box>
+      {/*  <div className="radio-product">
+        <div className="radioProduct-produc">
+          <Radio value="todos" color="success" onChange={hadleRadioAll} />
+          <p>Todos</p>
+        </div>
+        <div className="radioProduct-produc">
+          <Radio value="pizza" color="success" onChange={hadleRadioPizza} />
+          <p>Pizza</p>
+        </div>
+        <div className="radioProduct-produc">
+          <Radio value="pasta" color="success" onChange={hadleRadioPasta} />
+          <p>Pasta</p>
+        </div>
+        <div className="radioProduct-produc">
+          <Radio
+            value="ensalada"
+            color="success"
+            onChange={hadleRadioEnsalada}
+          />
+          <p>Ensalada</p>
+        </div>
+        <div className="radioProduct-produc">
+          <Radio value="postre" color="success" onChange={hadleRadioPostre} />
+          <p>Postre</p>
+        </div>
+        <div className="radioProduct-produc">
+          <Radio value="bebida" color="success" onChange={hadleRadioBebida} />
+          <p>Bebida</p>
+        </div>
+      </div> */}
       <Box sx={{ flexGrow: 1 }} paddingInline={10}>
         <Grid container spacing={0}>
           <Grid item size={2}>

@@ -1,7 +1,7 @@
 .container-product {
   /* background-color: rgb(70, 29, 1); */
   background-image: url(../../assets/images/fondo-admin.jpg);
-  background-size: contain;
+  background-size: auto;
   padding-bottom: 100px;
   padding-top: 120px;
 
@@ -33,6 +33,27 @@
   color: white;
   transition: 0.4s;
 }
+.radio-product {
+  background-color: #b8001f;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-inline: auto;
+  width: 750px;
+  border-radius: 20px;
+}
+.radioProduct-produc {
+  display: flex;
+}
+
+.radioProduct-produc > p {
+  font-size: 1rem;
+  color: white;
+
+  margin-block: auto;
+}
+
 @media (max-width: 899px) {
   .container-product > h4 {
     font-size: 2rem;

@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/auth.context";
 import { AddProductContext } from "../../context/addproduct.context";
 import service from "../../services/config";
 import "./style-Sumary.css";
-import { Box, Container } from "@mui/material";
+import { Box, Container, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ButtonComponent } from "../../components/button/ButtonComponent";
@@ -12,6 +12,14 @@ import { Footer } from "../../components/footer/Footer";
 
 export const Sumary = () => {
   const [totalAmount, setTotalAmount] = useState();
+  const [address, setAddress] = useState();
+  const [floor, setFloor] = useState();
+  const [letter, setLetter] = useState();
+  const [cp, setCp] = useState();
+  const [city, setCity] = useState();
+  const [province, setProvince] = useState();
+  const [mssError, setMssError] = useState();
+
   const { finalOrder, updateContext } = useContext(AddProductContext);
   const { loggedUserId } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -44,15 +52,27 @@ export const Sumary = () => {
       product: finalOrder.map((elem) => elem.id),
       totalAmount,
       usuario: loggedUserId,
+      address,
+      floor,
+      letter,
+      cp,
+      city,
+      province,
     };
-    try {
-      const response = await service.post("/user/order", data);
-      console.log(response);
-      localStorage.removeItem("order");
-      updateContext();
-      navigate("/");
-    } catch {
-      navigate("/error");
+    if (!address) {
+      setMssError("dirección");
+    } else if (!city) {
+      setMssError("city");
+    } else {
+      try {
+        const response = await service.post("/user/order", data);
+        console.log(response);
+        localStorage.removeItem("order");
+        updateContext();
+        navigate("/");
+      } catch {
+        navigate("/error");
+      }
     }
   };
 
@@ -60,9 +80,13 @@ export const Sumary = () => {
     navigate(-1);
   };
 
+  const handleSumary = (e) => {
+    console.log(e);
+  };
+
   return (
     <div>
-      <section className="container-pizza">
+      <section className="container-sumary">
         <h4>Resumen del pedido</h4>
         <Container>
           <Box maxWidth={600}>
@@ -170,7 +194,126 @@ export const Sumary = () => {
             </Grid>
           </Box>
         </Container>
-        <div className="button-pizza">
+
+        <div className="form-sumary">
+          {" "}
+          <Container>
+            <Box component="form" onSubmit={handleSumary} maxWidth={600}>
+              <div className="input-sumary">
+                <p style={{ color: "black" }}>¿A dónde lo enviamos?</p>
+                <Grid container spacing={2}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
+                    <TextField
+                      sx={{ paddingBlock: "10px", borderColor: "white" }}
+                      fullWidth
+                      name="no-autocomplete"
+                      id="dirección"
+                      label={"Calle, plaza, avd..."}
+                      helperText={mssError === "dirección" && "campo requerido"}
+                      error={mssError === "dirección" && true}
+                      type="text"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      inputProps={{
+                        autoComplete: "new-password",
+                      }}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 4, sm: 2 }}>
+                    <TextField
+                      sx={{ paddingBlock: "10px", borderColor: "white" }}
+                      fullWidth
+                      name="no-autocomplete"
+                      id="floor"
+                      label={"Nº"}
+                      type="text"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      value={floor}
+                      onChange={(e) => setFloor(e.target.value)}
+                      inputProps={{
+                        autoComplete: "new-password",
+                      }}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 4, sm: 2 }}>
+                    <TextField
+                      sx={{ paddingBlock: "10px", borderColor: "white" }}
+                      fullWidth
+                      name="no-autocomplete"
+                      id="letter"
+                      label={"Letra"}
+                      type="text"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      value={letter}
+                      onChange={(e) => setLetter(e.target.value)}
+                      inputProps={{
+                        autoComplete: "new-password",
+                      }}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 4, sm: 2 }}>
+                    <TextField
+                      sx={{ paddingBlock: "10px", borderColor: "white" }}
+                      fullWidth
+                      name="no-autocomplete"
+                      id="codigo postal"
+                      label={"C.P."}
+                      type="text"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      value={cp}
+                      onChange={(e) => setCp(e.target.value)}
+                      inputProps={{
+                        autoComplete: "new-password",
+                      }}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 12, sm: 6 }}>
+                    <TextField
+                      sx={{ paddingBlock: "10px", borderColor: "white" }}
+                      fullWidth
+                      name="no-autocomplete"
+                      id="ciudad"
+                      label={"Ciudad"}
+                      helperText={mssError === "city" && "campo requerido"}
+                      error={mssError === "city" && true}
+                      type="text"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      inputProps={{
+                        autoComplete: "new-password",
+                      }}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 12, sm: 6 }}>
+                    <TextField
+                      sx={{ paddingBlock: "10px", borderColor: "white" }}
+                      fullWidth
+                      name="no-autocomplete"
+                      id="provincia"
+                      label={"Provincia"}
+                      type="text"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      value={province}
+                      onChange={(e) => setProvince(e.target.value)}
+                      inputProps={{
+                        autoComplete: "new-password",
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+            </Box>
+          </Container>
+        </div>
+        <div className="button-sumary">
           <ButtonComponent
             textButton={"Realizar Pedido"}
             functionButton={handlePlaceOrder}
