@@ -438,6 +438,7 @@ export const Product = () => {
                     <Item
                       sx={{
                         fontFamily: "Signika",
+                        minHeight: "70px",
                       }}
                     >
                       {elem.title}
@@ -447,6 +448,7 @@ export const Product = () => {
                     <Item
                       sx={{
                         fontFamily: "Signika",
+                        minHeight: "70px",
                       }}
                     >
                       {elem.description}
@@ -456,6 +458,7 @@ export const Product = () => {
                     <Item
                       sx={{
                         fontFamily: "Signika",
+                        minHeight: "70px",
                       }}
                     >
                       {elem.ingredients}
@@ -465,6 +468,7 @@ export const Product = () => {
                     <Item
                       sx={{
                         fontFamily: "Signika",
+                        minHeight: "70px",
                       }}
                     >
                       {elem.category}
@@ -474,13 +478,19 @@ export const Product = () => {
                     <Item
                       sx={{
                         fontFamily: "Signika",
+                        minHeight: "70px",
                       }}
                     >
                       {elem.price}€
                     </Item>
                   </Grid>
                   <Grid item size={2}>
-                    <Item>
+                    <Item
+                      sx={{
+                        fontFamily: "Signika",
+                        minHeight: "70px",
+                      }}
+                    >
                       <button
                         className="button-product"
                         onClick={() => handleDeleted(elem._id)}

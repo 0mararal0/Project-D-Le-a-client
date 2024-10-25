@@ -115,7 +115,7 @@ export const ProductCard = ({ title, ingredients, price, id }) => {
               min={1}
               max={5}
             />
-            {/* <Pre style={{ color: "white" }}>Current value: {value ?? " "}</Pre> */}
+
             <p className="count-productCard">{value ?? "1 "}</p>
           </Layout>
 
