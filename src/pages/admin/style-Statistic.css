@@ -1,10 +1,8 @@
 .container-statistic {
-  /* background-color: rgb(70, 29, 1); */
   background-image: url(../../assets/images/fondo-admin.jpg);
   background-size: contain;
   padding-bottom: 100px;
   padding-top: 120px;
-
   min-height: calc(100dvh - 150px);
   height: auto;
 }
@@ -16,7 +14,6 @@
   text-align: center;
   margin-bottom: 100px;
 }
-
 @media (max-width: 899px) {
   .container-statistic > h4 {
     font-size: 2rem;

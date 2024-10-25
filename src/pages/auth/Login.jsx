@@ -1,10 +1,9 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./style-Login.css";
 import { AuthContext } from "../../context/auth.context.jsx";
 import service from "../../services/config.js";
+import "./style-Login.css";
 import { Box, Button, Container, TextField } from "@mui/material";
-import { Footer } from "../../components/footer/Footer.jsx";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,7 +31,7 @@ export const Login = () => {
     if (!validateEmail(email) && validatePassword(password)) {
       setError({
         error: true,
-        message: "Formato de email incorrecto",
+        message: "Credenciales incorrectas",
       });
     } else {
       try {
@@ -77,6 +76,16 @@ export const Login = () => {
                 error={error.error}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    fontFamily: "Signika",
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    fontFamily: "Signika",
+                  },
+                }}
               />
               <TextField
                 sx={{ paddingBlock: "10px", borderColor: "white" }}
@@ -89,6 +98,11 @@ export const Login = () => {
                 error={error.error}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    fontFamily: "Signika",
+                  },
+                }}
               />
               <p style={{ color: "red" }}>{errorMessage}</p>
               <p className="linkRegister-login">
@@ -103,6 +117,7 @@ export const Login = () => {
                   borderRadius: "10px",
                   color: "black",
                   borderColor: "black",
+                  fontFamily: "signika",
                 }}
               >
                 Entrar
@@ -116,6 +131,7 @@ export const Login = () => {
                   color: "black",
                   borderColor: "black",
                   margin: "10px",
+                  fontFamily: "signika",
                 }}
                 onClick={() => navigate("/")}
               >
@@ -125,7 +141,6 @@ export const Login = () => {
           </Box>
         </Container>
       </div>
-      <Footer />
     </div>
   );
 };

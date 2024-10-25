@@ -11,7 +11,6 @@ import pastaOrder from "../assets/images/pasta-order.jpg";
 import postreOrder from "../assets/images/postre-order.webp";
 import ensaladaOrder from "../assets/images/ensalada-order.jpg";
 import bebidaOrder from "../assets/images/bebida-order.jpg";
-import { Footer } from "../components/footer/Footer";
 
 export const Order = () => {
   const navigate = useNavigate();

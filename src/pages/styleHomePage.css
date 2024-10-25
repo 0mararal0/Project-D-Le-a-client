@@ -2,15 +2,11 @@
   background-image: url("../assets/images/home1.jpg");
   background-size: cover;
   padding-top: 160px;
-
   min-height: calc(100dvh - 150px);
   height: auto;
   display: flex;
   flex-direction: column;
-
-  /*  align-items: center; */
 }
-
 .container-homePage > h1 {
   font-size: 8rem;
   color: white;
@@ -19,7 +15,6 @@
   text-align: center;
   margin-bottom: 100px;
 }
-
 .icon-homePage {
   display: flex;
   gap: 20px;
@@ -29,15 +24,6 @@
   margin-bottom: 50px;
   margin-inline: auto;
 }
-/* .icon-homePage:hover {
-  display: flex;
-  gap: 20px;
-  width: 80%;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 50px;
-  box-shadow: 2px 2px 10px #b8001f;
-} */
 .iconoPizza-homePage,
 .iconoPasta-homePage,
 .iconoEnsalada-homePage,
@@ -60,13 +46,11 @@
 .iconoPostre-homePage:hover,
 .iconoBebida-homePage:hover {
   background-color: #b67f88aa;
-
   box-shadow:
     5px 5px 0px grey,
     2px 2px 10px #b8001f;
   transition: 0.4s;
 }
-
 .iconoPizza-homePage > h3,
 .iconoPasta-homePage > h3,
 .iconoEnsalada-homePage > h3,
@@ -93,7 +77,6 @@
   background-color: #b8001f72;
   padding-block: 50px;
 }
-
 .titleCarrusel-homePage {
   width: 100%;
   display: flex;
@@ -113,6 +96,7 @@
   padding-block: 50px;
   gap: 50px;
   flex-wrap: wrap;
+  font-family: "signika";
 }
 .map-homePage {
   width: 400px;

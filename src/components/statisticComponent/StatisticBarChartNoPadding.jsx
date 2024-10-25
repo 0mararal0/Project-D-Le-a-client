@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import service from "../../services/config";
 import {
   BarChart,
   Bar,
@@ -9,34 +10,26 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import service from "../../services/config";
 
 export const StatisticBarChartNoPadding = () => {
   const [amounts, setAmounts] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     amount();
   }, []);
+
   const amount = async () => {
     try {
       const response = await service.get("/admin/order");
       const datos = response.data
         .sort((a, b) => new Date(b["updatedAt"]) - new Date(a["updatedAt"]))
         .slice(0, 6);
-
       setAmounts(datos);
-      console.log(response.data);
     } catch {
       navigate("/error");
     }
   };
-
-  if (amounts.length === 0) {
-    console.log("entra");
-
-    return <h3 style={{ color: "white" }}>loading...</h3>;
-  }
-  console.log(amounts);
 
   const data = [
     {
@@ -65,6 +58,10 @@ export const StatisticBarChartNoPadding = () => {
     },
   ];
 
+  if (amounts.length === 0) {
+    return <h3 style={{ color: "white" }}>loading...</h3>;
+  }
+
   return (
     <div
       style={{
@@ -80,7 +77,6 @@ export const StatisticBarChartNoPadding = () => {
           fontSize: "2rem",
           fontFamily: "logofont",
           display: "flex",
-
           position: "relative",
           top: "-30px",
           justifyContent: "center",
@@ -90,7 +86,6 @@ export const StatisticBarChartNoPadding = () => {
       >
         Pedidos
       </p>
-
       <BarChart
         width={500}
         height={300}
@@ -117,6 +112,7 @@ export const StatisticBarChartNoPadding = () => {
           dataKey="Euros"
           fill="#b8001f"
           background={{ fill: "rgba(128, 128, 128, 0.385)" }}
+          fontFamily="signika"
         />
       </BarChart>
     </div>

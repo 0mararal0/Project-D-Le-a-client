@@ -8,7 +8,6 @@ import { Box, Container, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ButtonComponent } from "../../components/button/ButtonComponent";
-import { Footer } from "../../components/footer/Footer";
 
 export const Sumary = () => {
   const [totalAmount, setTotalAmount] = useState();
@@ -19,6 +18,7 @@ export const Sumary = () => {
   const [city, setCity] = useState();
   const [province, setProvince] = useState();
   const [mssError, setMssError] = useState();
+  const [mssErrorProduct, setMssErrorProduct] = useState();
 
   const { finalOrder, updateContext } = useContext(AddProductContext);
   const { loggedUserId } = useContext(AuthContext);
@@ -49,7 +49,7 @@ export const Sumary = () => {
 
   const handlePlaceOrder = async () => {
     const data = {
-      product: finalOrder.map((elem) => elem.id),
+      product: finalOrder?.map((elem) => elem.id),
       totalAmount,
       usuario: loggedUserId,
       address,
@@ -63,10 +63,11 @@ export const Sumary = () => {
       setMssError("dirección");
     } else if (!city) {
       setMssError("city");
+    } else if (!finalOrder) {
+      setMssErrorProduct("No hay productos añadidos");
     } else {
       try {
-        const response = await service.post("/user/order", data);
-        console.log(response);
+        await service.post("/user/order", data);
         localStorage.removeItem("order");
         updateContext();
         navigate("/");
@@ -78,10 +79,6 @@ export const Sumary = () => {
 
   const handleReturn = () => {
     navigate(-1);
-  };
-
-  const handleSumary = (e) => {
-    console.log(e);
   };
 
   return (
@@ -198,7 +195,7 @@ export const Sumary = () => {
         <div className="form-sumary">
           {" "}
           <Container>
-            <Box component="form" onSubmit={handleSumary} maxWidth={600}>
+            <Box component="form" maxWidth={600}>
               <div className="input-sumary">
                 <p style={{ color: "black" }}>¿A dónde lo enviamos?</p>
                 <Grid container spacing={2}>
@@ -218,6 +215,9 @@ export const Sumary = () => {
                       onChange={(e) => setAddress(e.target.value)}
                       inputProps={{
                         autoComplete: "new-password",
+                        sx: {
+                          fontFamily: "Signika",
+                        },
                       }}
                     />
                   </Grid>
@@ -235,6 +235,9 @@ export const Sumary = () => {
                       onChange={(e) => setFloor(e.target.value)}
                       inputProps={{
                         autoComplete: "new-password",
+                        sx: {
+                          fontFamily: "Signika",
+                        },
                       }}
                     />
                   </Grid>
@@ -252,6 +255,9 @@ export const Sumary = () => {
                       onChange={(e) => setLetter(e.target.value)}
                       inputProps={{
                         autoComplete: "new-password",
+                        sx: {
+                          fontFamily: "Signika",
+                        },
                       }}
                     />
                   </Grid>
@@ -269,6 +275,9 @@ export const Sumary = () => {
                       onChange={(e) => setCp(e.target.value)}
                       inputProps={{
                         autoComplete: "new-password",
+                        sx: {
+                          fontFamily: "Signika",
+                        },
                       }}
                     />
                   </Grid>
@@ -288,6 +297,9 @@ export const Sumary = () => {
                       onChange={(e) => setCity(e.target.value)}
                       inputProps={{
                         autoComplete: "new-password",
+                        sx: {
+                          fontFamily: "Signika",
+                        },
                       }}
                     />
                   </Grid>
@@ -305,14 +317,32 @@ export const Sumary = () => {
                       onChange={(e) => setProvince(e.target.value)}
                       inputProps={{
                         autoComplete: "new-password",
+                        sx: {
+                          fontFamily: "Signika",
+                        },
                       }}
                     />
                   </Grid>
+                  {!finalOrder && (
+                    <Grid size={{ xs: 12 }}>
+                      <div>
+                        <p
+                          style={{
+                            fontFamily: "signika",
+                            color: "red",
+                          }}
+                        >
+                          {mssErrorProduct}
+                        </p>
+                      </div>
+                    </Grid>
+                  )}
                 </Grid>
               </div>
             </Box>
           </Container>
         </div>
+
         <div className="button-sumary">
           <ButtonComponent
             textButton={"Realizar Pedido"}

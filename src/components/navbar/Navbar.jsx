@@ -1,7 +1,8 @@
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { AddProductContext } from "../../context/addproduct.context";
-import { useContext, useEffect, useState } from "react";
+import "./style-Navbar.css";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,15 +15,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import Logo from "../../assets/images/logo.png";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-import "./style-Navbar.css";
-
-/* const pages = ["Haz tu pedido", "Sobre Nosotros", "Contacto"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"]; */
+import Logo from "../../assets/images/logo.png";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -36,9 +32,28 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [settings, setSettings] = useState([]);
   const [bgColorScroll, setBgColorScroll] = useState("transparent");
   const { finalOrder } = useContext(AddProductContext);
+  const navigate = useNavigate();
+  const { isLoggedIn, authenticateUser, isAdmin, photoProfile, firstName } =
+    useContext(AuthContext);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      localStorage.removeItem("authToken");
+      await authenticateUser();
+      navigate("/");
+    } catch {
+      navigate("/error");
+    }
+  };
 
   const handleScroll = () => {
     if (window.scrollY > 70) {
@@ -47,81 +62,25 @@ export const Navbar = () => {
       setBgColorScroll("transparent");
     }
   };
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const navigate = useNavigate();
-  /* const productString = localStorage.getItem("order");
-  useEffect(() => {
-    if (productString) {
-      const product = JSON.parse(productString);
-      setValueProduct(product.length);
-    }
-  }, [productString]); */
-
-  const { isLoggedIn, authenticateUser, isAdmin, photoProfile, firstName } =
-    useContext(AuthContext);
-  console.log(photoProfile);
-
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem("authToken"); // removemos el token
-
-      await authenticateUser(); // validat el token, la funcion cambia los estados
-
-      navigate("/"); // navegamos a cualquier página pública
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    /* if (e === "Sobre Nosotros") {
-      navigate("/about");
-    }
-    if (e === "Contacto") {
-      navigate("/contact");
-    }
-    if (e === "Haz tu pedido") {
-      navigate("/order");
-    } */
-
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-  /*  if (!isLoggedIn) {
-    setSettings([
-      { name: "Login", dir: "/login" },
-      { name: "Regístrate", dir: "/signup" },
-    ]);
-  } */
   return (
     <>
-      {/* <nav>
-        <Link to="/">Home</Link>
-        {!isLoggedIn && <Link to="/signup">Registro</Link>}
-        {!isLoggedIn && <Link to="/login">Acceso</Link>}
-        {isLoggedIn && <Link to="/private-page-example">Ejemplo Privado</Link>}
-        {isLoggedIn && <Link onClick={handleLogout}>Cerrar sesión</Link>}
-        {isLoggedIn && isAdmin && <span>usuario admin</span>}
-        {isLoggedIn && !isAdmin && <span>usuario normal</span>}
-      </nav> */}
       <div
         style={{
           backgroundColor: bgColorScroll,
@@ -130,10 +89,7 @@ export const Navbar = () => {
           position: "fixed",
         }}
       >
-        <Container
-          sx={{ position: "fixed", top: 20, left: 0, right: 0 }}
-          /* className="container-navBar" */
-        >
+        <Container sx={{ position: "fixed", top: 20, left: 0, right: 0 }}>
           <AppBar
             position="static"
             style={{
@@ -175,16 +131,21 @@ export const Navbar = () => {
                     }}
                     open={Boolean(anchorElNav)}
                     onClose={handleCloseNavMenu}
-                    sx={{ display: { xs: "block", md: "none" } }}
+                    sx={{
+                      display: { xs: "block", md: "none" },
+                    }}
                   >
-                    {/*  {pages.map((page) => ( */}
                     <MenuItem onClick={handleCloseNavMenu}>
                       {" "}
                       <Typography sx={{ textAlign: "center" }}>
                         {" "}
                         <Link
                           to={"/order"}
-                          style={{ textDecoration: "none", color: "black" }}
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                            fontFamily: "signika",
+                          }}
                         >
                           Haz tu pedido{" "}
                         </Link>
@@ -196,7 +157,11 @@ export const Navbar = () => {
                         {" "}
                         <Link
                           to={"/about"}
-                          style={{ textDecoration: "none", color: "black" }}
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                            fontFamily: "signika",
+                          }}
                         >
                           Sobre Nosotros{" "}
                         </Link>
@@ -208,7 +173,11 @@ export const Navbar = () => {
                         {" "}
                         <Link
                           to={"/contact"}
-                          style={{ textDecoration: "none", color: "black" }}
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                            fontFamily: "signika",
+                          }}
                         >
                           Contacto{" "}
                         </Link>
@@ -221,7 +190,11 @@ export const Navbar = () => {
                           {" "}
                           <Link
                             to={"/admin/home"}
-                            style={{ textDecoration: "none", color: "black" }}
+                            style={{
+                              textDecoration: "none",
+                              color: "black",
+                              fontFamily: "signika",
+                            }}
                           >
                             Panel Administrador{" "}
                           </Link>
@@ -272,14 +245,17 @@ export const Navbar = () => {
                   D-Leña
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  {/*  {pages.map((page) => ( */}
                   <Button
                     onClick={() => handleCloseNavMenu()}
                     sx={{ my: 2, color: "white", display: "block" }}
                   >
                     <Link
                       to={"/order"}
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontFamily: "signika",
+                      }}
                     >
                       Haz tu pedido
                     </Link>
@@ -290,7 +266,11 @@ export const Navbar = () => {
                   >
                     <Link
                       to={"/about"}
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontFamily: "signika",
+                      }}
                     >
                       Sobre Nosotros
                     </Link>
@@ -301,7 +281,11 @@ export const Navbar = () => {
                   >
                     <Link
                       to={"/contact"}
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontFamily: "signika",
+                      }}
                     >
                       Contacto
                     </Link>
@@ -313,21 +297,25 @@ export const Navbar = () => {
                     >
                       <Link
                         to={"/admin/home"}
-                        style={{ textDecoration: "none", color: "white" }}
+                        style={{
+                          textDecoration: "none",
+                          color: "white",
+                          fontFamily: "signika",
+                        }}
                       >
                         Panel Administrador
                       </Link>
                     </Button>
                   )}
                 </Box>
-
                 {firstName ? (
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <p
                       style={{
                         color: "white",
-                        fontSize: ".7rem",
+                        fontSize: ".8rem",
                         marginBlock: "3px",
+                        fontFamily: "signika",
                       }}
                     >
                       Hola, {firstName}
@@ -371,7 +359,12 @@ export const Navbar = () => {
                                 }}
                                 to="/login"
                               >
-                                <Typography sx={{ textAlign: "center" }}>
+                                <Typography
+                                  sx={{
+                                    textAlign: "center",
+                                    fontFamily: "signika",
+                                  }}
+                                >
                                   Login
                                 </Typography>
                               </Link>
@@ -386,7 +379,12 @@ export const Navbar = () => {
                                 }}
                                 to="/signup"
                               >
-                                <Typography sx={{ textAlign: "center" }}>
+                                <Typography
+                                  sx={{
+                                    textAlign: "center",
+                                    fontFamily: "signika",
+                                  }}
+                                >
                                   Registro
                                 </Typography>
                               </Link>
@@ -401,7 +399,12 @@ export const Navbar = () => {
                                 }}
                                 to="/user/profile"
                               >
-                                <Typography sx={{ textAlign: "center" }}>
+                                <Typography
+                                  sx={{
+                                    textAlign: "center",
+                                    fontFamily: "signika",
+                                  }}
+                                >
                                   Perfil
                                 </Typography>
                               </Link>
@@ -416,7 +419,12 @@ export const Navbar = () => {
                                 }}
                                 to="/user/history"
                               >
-                                <Typography sx={{ textAlign: "center" }}>
+                                <Typography
+                                  sx={{
+                                    textAlign: "center",
+                                    fontFamily: "signika",
+                                  }}
+                                >
                                   Historial
                                 </Typography>
                               </Link>
@@ -431,7 +439,12 @@ export const Navbar = () => {
                                 }}
                                 to="/user/sumary"
                               >
-                                <Typography sx={{ textAlign: "center" }}>
+                                <Typography
+                                  sx={{
+                                    textAlign: "center",
+                                    fontFamily: "signika",
+                                  }}
+                                >
                                   Pedido
                                 </Typography>
                               </Link>
@@ -446,7 +459,12 @@ export const Navbar = () => {
                                 }}
                                 onClick={handleLogout}
                               >
-                                <Typography sx={{ textAlign: "center" }}>
+                                <Typography
+                                  sx={{
+                                    textAlign: "center",
+                                    fontFamily: "signika",
+                                  }}
+                                >
                                   LogOut
                                 </Typography>
                               </Link>

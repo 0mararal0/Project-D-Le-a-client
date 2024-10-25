@@ -10,7 +10,6 @@
 }
 .container-login > h4 {
   font-size: 4.5rem;
-
   font-family: "logofont";
   font-weight: lighter;
   text-align: center;
@@ -18,15 +17,11 @@
 }
 .input-login {
   background-color: rgba(255, 255, 255, 0.767);
-
   padding: 50px 20px;
   border: 1px solid white;
   border-radius: 20px;
   box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.767);
 }
-/* .email-login {
-  margin-block: 10px;
-} */
 .input-login:focus {
   background-color: rgba(255, 255, 255, 0.767);
 }
@@ -37,8 +32,8 @@
   color: black !important;
   margin-top: 5px;
   margin-bottom: 15px;
+  font-family: "signika";
 }
-
 @media (max-width: 899px) {
   .container-login > h4 {
     font-size: 3rem;

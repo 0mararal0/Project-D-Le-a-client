@@ -1,11 +1,11 @@
-import "./style-ProductCard.css";
+import { forwardRef, useContext, useState } from "react";
 import { AddProductContext } from "../../context/addproduct.context";
+import "./style-ProductCard.css";
 import { unstable_useNumberInput as useNumberInput } from "@mui/base/unstable_useNumberInput";
 import { styled } from "@mui/system";
 import { unstable_useForkRef as useForkRef } from "@mui/utils";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
-import { forwardRef, useContext, useState } from "react";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
@@ -59,7 +59,6 @@ export const ProductCard = ({ title, ingredients, price, id }) => {
         }
         return acc;
       }, []);
-      console.log(orderDisplayed);
 
       const addOrderString = JSON.stringify(orderDisplayed);
       localStorage.setItem("order", [addOrderString]);
@@ -132,6 +131,7 @@ export const ProductCard = ({ title, ingredients, price, id }) => {
     </Box>
   );
 };
+
 const blue = {
   100: "#E5EAF2",
   200: "#DAE2ED",
@@ -200,22 +200,18 @@ const StyledStepperButton = styled("button")(
   padding: 0;
   color: inherit;
   background: ${theme.palette.mode === "dark" ? grey[900] : grey[50]};
-
   &:hover {
     cursor: pointer;
     background: ${theme.palette.mode === "dark" ? blue[700] : blue[500]};
     color: ${grey[50]};
   }
-
   &:focus-visible {
     outline: 0;
     box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[700] : blue[200]};
   }
-
   &.increment {
     grid-area: increment;
   }
-
   &.decrement {
     grid-area: decrement;
   }
@@ -227,8 +223,4 @@ const Layout = styled("div")`
   flex-flow: row nowrap;
   align-items: center;
   column-gap: 1rem;
-`;
-
-const Pre = styled("pre")`
-  font-size: 0.75rem;
 `;

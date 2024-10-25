@@ -78,4 +78,13 @@
     position: static;
     max-width: 572px;
   }
+  .rowProduct-sumary {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 500px) {
+  .rowProduct-sumary {
+    font-size: 0.8rem;
+    font-weight: 100;
+  }
 }

@@ -4,7 +4,6 @@
   width: 450px;
   display: flex;
   align-items: center;
-  /* border: 2px solid black; */
   border-radius: 20px;
   box-shadow: 1px 1px 2px white;
   padding: 10px 20px;
@@ -31,7 +30,7 @@
 }
 .count-productCard {
   font-size: 1.3rem;
-
+  font-family: "signika";
   border: 2px solid white;
   width: 30px;
   height: 30px;
@@ -69,10 +68,8 @@
   }
   .count-productCard {
     font-size: 1.1rem;
-
     width: 28px;
     height: 28px;
-
     padding: 2px;
   }
 }

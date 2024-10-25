@@ -1,5 +1,4 @@
 import "./style-Contact.css";
-import { Footer } from "../components/footer/Footer";
 import Container from "@mui/material/Container";
 
 export const Contact = () => {
@@ -38,24 +37,37 @@ export const Contact = () => {
           </section>
           <section className="section-contact">
             <h6>Formulario de Contacto</h6>
-            <p>
+            <p style={{ marginBottom: "20px" }}>
               Si prefieres, también puedes enviarnos un mensaje a través del
               siguiente formulario y te responderemos lo antes posible.
             </p>
             <form action="">
-              <label>
+              <label style={{ fontFamily: "signika" }}>
                 Nombre:
                 <br />
-                <input type="text" id="name" name="name" required />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  style={{ marginBottom: "20px" }}
+                />
               </label>
               <br></br>
-              <label>
+              <label style={{ fontFamily: "signika" }}>
+                {" "}
                 Correo Electrónico:
                 <br />
-                <input type="email" id="email" name="email" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  style={{ marginBottom: "20px" }}
+                />
               </label>
               <br></br>
-              <label>
+              <label style={{ fontFamily: "signika" }}>
                 Mensaje:
                 <br />
                 <textarea
@@ -63,6 +75,7 @@ export const Contact = () => {
                   name="message"
                   rows="4"
                   required
+                  style={{ marginBottom: "20px" }}
                 ></textarea>
               </label>
               <br></br>

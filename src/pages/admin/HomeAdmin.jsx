@@ -1,31 +1,20 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style-homeAdmin.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
-import { Container } from "@mui/material";
 import Product from "../../assets/images/pasta.png";
 import User from "../../assets/images/user.webp";
 import Statistic from "../../assets/images/statistic.png";
-import { useNavigate } from "react-router-dom";
-import { Footer } from "../../components/footer/Footer";
 
 export const HomeAdmin = () => {
   const navigate = useNavigate();
+
   return (
     <div className="container-homeAdmin">
       <h4>Panel de Admnistrador</h4>
-      {/* <Container
-        maxWidth="md"
-        style={{
-          display: "flex",
-          gap: 30,
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      > */}
       <div className="containerCard-homeAdmin">
         <Card className="card-homeAdmin">
           <CardActionArea>
@@ -112,8 +101,6 @@ export const HomeAdmin = () => {
           </CardActionArea>
         </Card>
       </div>
-      {/*  </Container> */}
-      <Footer />
     </div>
   );
 };

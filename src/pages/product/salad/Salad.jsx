@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/auth.context";
 import service from "../../../services/config";
 import Container from "@mui/material/Container";
-import { Footer } from "../../../components/footer/Footer";
 import { ProductCard } from "../../../components/card/ProductCard";
 import { ButtonComponent } from "../../../components/button/ButtonComponent";
 
@@ -72,7 +71,6 @@ export const Salad = () => {
           />
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

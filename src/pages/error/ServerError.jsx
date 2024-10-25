@@ -1,6 +1,5 @@
-import React from "react";
-import "./style-ServerError.css";
 import { Link } from "react-router-dom";
+import "./style-ServerError.css";
 
 export const ServerError = () => {
   return (

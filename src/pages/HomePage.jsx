@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 import "./styleHomePage.css";
-
 import iconPizza from "../assets/images/pizza.png";
 import iconPasta from "../assets/images/pasta.png";
 import iconEnsalada from "../assets/images/ensalada.png";
 import iconPostre from "../assets/images/postre.png";
 import iconBeber from "../assets/images/beber.png";
-
-import Slider from "react-slick";
 import { Carrusel } from "../components/carrusel/Carrusel";
 import { MapLocation } from "../components/map/MapLocation";
 
@@ -26,7 +23,6 @@ export const HomePage = () => {
     <>
       <div className="container-homePage">
         <h1>D-Leña</h1>
-
         <div className="icon-homePage">
           <Link to={"/product/pizza"} style={{ textDecoration: "none" }}>
             <div className="iconoPizza-homePage">
@@ -69,7 +65,9 @@ export const HomePage = () => {
           <div className="titleMap-homePage">
             <h5>Ven a conocernos</h5>
             <div className="textMap-homePage">
-              <p>Estamos en:</p>
+              <p>
+                <strong>Estamos en:</strong>
+              </p>
               <p>Plaza mayor 1 Valladolid, España</p>
               <p>
                 <strong>Teléfono:</strong> +34 699 69 96 99

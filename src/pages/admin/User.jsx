@@ -1,59 +1,52 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import service from "../../services/config";
 import "./style-user.css";
-import { Footer } from "../../components/footer/Footer";
 import { Box, Checkbox, Paper, styled } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import service from "../../services/config";
 
 export const User = () => {
   const [dataUsers, setDataUsers] = useState([]);
-  const [newDate, setNewDate] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     users();
   }, []);
+
   const users = async () => {
     try {
       const response = await service.get("/admin/user");
       setDataUsers(response.data);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
-  console.log(dataUsers);
 
   const formatDate = (elem) => {
     const fecha = new Date(elem);
-
     const dia = String(fecha.getDate()).padStart(2, "0");
     const mes = String(fecha.getMonth() + 1).padStart(2, "0");
     const año = String(fecha.getFullYear());
-
     return `${dia}/${mes}/${año}`;
   };
 
   const handleBlock = async (id) => {
-    console.log(id);
     const data = { isDeleted: true };
-
     try {
-      const response = await service.put(`/admin/user/${id}`, data);
-      console.log(response);
+      await service.put(`/admin/user/${id}`, data);
       users();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
-  const handleUnlock = async (id) => {
-    console.log(id);
-    const data = { isDeleted: false };
 
+  const handleUnlock = async (id) => {
+    const data = { isDeleted: false };
     try {
-      const response = await service.put(`/admin/user/${id}`, data);
-      console.log(response);
+      await service.put(`/admin/user/${id}`, data);
       users();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
 
@@ -69,26 +62,21 @@ export const User = () => {
   }));
 
   const handleAdmin = async (id, e) => {
-    console.log(id);
     if (e.target.checked) {
       const data = { role: "admin" };
-
       try {
-        const response = await service.put(`/admin/user/${id}`, data);
-        console.log(response);
+        await service.put(`/admin/user/${id}`, data);
         users();
-      } catch (error) {
-        console.log(error);
+      } catch {
+        navigate("/error");
       }
     } else {
       const data = { role: "user" };
-
       try {
-        const response = await service.put(`/admin/user/${id}`, data);
-        console.log(response);
+        await service.put(`/admin/user/${id}`, data);
         users();
-      } catch (error) {
-        console.log(error);
+      } catch {
+        navigate("/error");
       }
     }
   };
@@ -104,6 +92,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 Nombre
@@ -114,6 +103,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 Apellidos
@@ -124,6 +114,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 Email
@@ -134,6 +125,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 Teléfono
@@ -144,6 +136,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 Creado
@@ -154,6 +147,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 Estado
@@ -164,6 +158,7 @@ export const User = () => {
                 sx={{
                   backgroundColor: "GrayText",
                   color: "white",
+                  fontFamily: "signika",
                 }}
               >
                 admin
@@ -188,6 +183,7 @@ export const User = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontFamily: "signika",
                       }}
                     >
                       {elem.firstName}
@@ -200,6 +196,7 @@ export const User = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontFamily: "signika",
                       }}
                     >
                       {elem.lastname}
@@ -212,6 +209,7 @@ export const User = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontFamily: "signika",
                       }}
                     >
                       {elem.email}
@@ -224,6 +222,7 @@ export const User = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontFamily: "signika",
                       }}
                     >
                       {elem.phone}
@@ -236,6 +235,7 @@ export const User = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontFamily: "signika",
                       }}
                     >
                       {formatDate(elem.createdAt)}
@@ -250,6 +250,7 @@ export const User = () => {
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
+                          fontFamily: "signika",
                         }}
                       >
                         <button
@@ -267,6 +268,7 @@ export const User = () => {
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
+                          fontFamily: "signika",
                         }}
                       >
                         <button

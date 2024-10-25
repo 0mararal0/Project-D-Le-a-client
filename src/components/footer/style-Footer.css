@@ -2,7 +2,6 @@
   width: 100%;
   height: 150px;
   color: white;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +14,6 @@
   object-fit: cover;
   filter: brightness(0.25);
   position: absolute;
-
   z-index: 0;
 }
 .container-footer > h5 {

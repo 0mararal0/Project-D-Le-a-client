@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Footer } from "../../components/footer/Footer";
 
 export const Signup = () => {
   const [name, setName] = useState("");
@@ -89,8 +88,16 @@ export const Signup = () => {
                     variant="outlined"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    InputLabelProps={{
+                      sx: {
+                        fontFamily: "Signika",
+                      },
+                    }}
                     inputProps={{
                       autoComplete: "new-password",
+                      sx: {
+                        fontFamily: "Signika",
+                      },
                     }}
                   />
                 </Grid2>
@@ -106,14 +113,26 @@ export const Signup = () => {
                     variant="outlined"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    InputLabelProps={{
+                      sx: {
+                        fontFamily: "Signika",
+                      },
+                    }}
                     inputProps={{
                       autoComplete: "new-password",
+                      sx: {
+                        fontFamily: "Signika",
+                      },
                     }}
                   />
                 </Grid2>
                 <Grid2 size={{ xs: 12 }}>
                   <TextField
-                    sx={{ paddingBlock: "10px", borderColor: "white" }}
+                    sx={{
+                      paddingBlock: "10px",
+                      borderColor: "white",
+                      fontFamily: "signika",
+                    }}
                     fullWidth
                     name="no-autocomplete"
                     id="email"
@@ -123,8 +142,16 @@ export const Signup = () => {
                     variant="outlined"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    InputLabelProps={{
+                      sx: {
+                        fontFamily: "Signika",
+                      },
+                    }}
                     inputProps={{
                       autoComplete: "new-password",
+                      sx: {
+                        fontFamily: "Signika",
+                      },
                     }}
                   />
                 </Grid2>
@@ -132,10 +159,13 @@ export const Signup = () => {
                   <FormControl
                     variant="outlined"
                     fullWidth
-                    sx={{ paddingBlock: "10px", borderColor: "white" }}
+                    sx={{
+                      paddingBlock: "10px",
+                      borderColor: "white",
+                    }}
                   >
                     <InputLabel htmlFor="outlined-adornment-password">
-                      Contraseña
+                      <span style={{ fontFamily: "Signika" }}>Contraseña</span>
                     </InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password"
@@ -166,7 +196,9 @@ export const Signup = () => {
                     sx={{ paddingBlock: "10px", borderColor: "white" }}
                   >
                     <InputLabel htmlFor="outlined-adornment-password2">
-                      Repite Contraseña
+                      <span style={{ fontFamily: "Signika" }}>
+                        Repite Contraseña
+                      </span>
                     </InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password2"
@@ -200,6 +232,7 @@ export const Signup = () => {
                   borderRadius: "10px",
                   color: "black",
                   borderColor: "black",
+                  fontFamily: "signika",
                 }}
               >
                 Registrar
@@ -213,6 +246,7 @@ export const Signup = () => {
                   color: "black",
                   borderColor: "black",
                   margin: "10px",
+                  fontFamily: "signika",
                 }}
                 onClick={() => navigate("/")}
               >
@@ -222,7 +256,6 @@ export const Signup = () => {
           </Box>
         </Container>
       </div>
-      <Footer />
     </div>
   );
 };

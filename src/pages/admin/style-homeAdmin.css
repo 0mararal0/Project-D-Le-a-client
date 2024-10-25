@@ -1,5 +1,4 @@
 .container-homeAdmin {
-  /* background-color: rgb(70, 29, 1); */
   background-image: url(../../assets/images/fondo-admin.jpg);
   background-size: cover;
   padding-bottom: 170;
@@ -17,14 +16,12 @@
 .containerCard-homeAdmin {
   display: flex;
   gap: 20px;
-
   justify-content: center;
   flex-wrap: wrap;
 }
 .card-homeAdmin {
   border: 16px solid white;
   margin-block: 30px;
-
   width: 200px;
 }
 @media (max-width: 899px) {

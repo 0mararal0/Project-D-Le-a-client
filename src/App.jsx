@@ -20,7 +20,6 @@ import { Sumary } from "./pages/user/Sumary";
 import Private from "./components/auth/Private";
 import { HomeAdmin } from "./pages/admin/HomeAdmin";
 import PrivateAdmin from "./components/auth/PrivateAdmin";
-
 import { Product } from "./pages/admin/Product";
 import { Statistic } from "./pages/admin/Statistic";
 import { User } from "./pages/admin/User";

@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import service from "../../services/config";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useNavigate } from "react-router-dom";
+import service from "../../services/config";
+import { PieChart, Pie, Cell } from "recharts";
 
 export const StatisticPieChart = () => {
   const [dataUser, setDataUser] = useState();
   const navigate = useNavigate();
+
   useEffect(() => {
     users();
   }, []);
+
   const users = async () => {
     try {
       const response = await service.get("/admin/user");
-
       const result = response.data.reduce((acc, objeto) => {
         const clave = objeto["role"];
         if (!acc[clave]) {
@@ -21,7 +22,6 @@ export const StatisticPieChart = () => {
         acc[clave]++;
         return acc;
       }, {});
-
       setDataUser(result);
     } catch {
       navigate("/error");
@@ -33,7 +33,6 @@ export const StatisticPieChart = () => {
     { name: "Group B", value: dataUser?.admin },
   ];
   const COLORS = ["#0088FE", "#FF8042"];
-
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -86,6 +85,7 @@ export const StatisticPieChart = () => {
       <p
         style={{
           fontSize: "1rem",
+          fontFamily: "signika",
           display: "flex",
           position: "relative",
           top: "80px",
@@ -112,7 +112,6 @@ export const StatisticPieChart = () => {
           ))}
         </Pie>
       </PieChart>
-
       <div
         style={{
           display: "flex",
@@ -126,11 +125,11 @@ export const StatisticPieChart = () => {
         <p
           style={{ width: "15px", height: "15px", backgroundColor: "#0088FE" }}
         />
-        <p style={{ color: "white" }}>Usiarios</p>
+        <p style={{ color: "white", fontFamily: "signika" }}>Usiarios</p>
         <p
           style={{ width: "15px", height: "15px", backgroundColor: "#FF8042" }}
         />
-        <p style={{ color: "white" }}>Administradores</p>
+        <p style={{ color: "white", fontFamily: "signika" }}>Administradores</p>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import service from "../../services/config";
 import "./style-product.css";
-import { Footer } from "../../components/footer/Footer";
 import {
   Box,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Grid2,
   InputAdornment,
   InputLabel,
@@ -18,7 +18,6 @@ import {
   TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import service from "../../services/config";
 
 export const Product = () => {
   const [dataProduct, setDataProduct] = useState([]);
@@ -28,10 +27,12 @@ export const Product = () => {
   const [category, setCategory] = useState();
   const [price, setPrice] = useState();
   const [valueRadio, setValueRadio] = useState("all");
+  const navigate = useNavigate();
 
   useEffect(() => {
     products();
   }, [valueRadio]);
+
   const products = async () => {
     try {
       const response = await service.get("/admin/product");
@@ -43,19 +44,17 @@ export const Product = () => {
         );
         setDataProduct(result);
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
-  const handleDeleted = async (id) => {
-    console.log(id);
 
+  const handleDeleted = async (id) => {
     try {
-      const response = await service.delete(`/admin/product/${id}`);
-      console.log(response);
+      await service.delete(`/admin/product/${id}`);
       products();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
   };
 
@@ -69,6 +68,7 @@ export const Product = () => {
       backgroundColor: "#1A2027",
     }),
   }));
+
   const handleSubmit = async () => {
     const addProduct = {
       title: name,
@@ -81,39 +81,17 @@ export const Product = () => {
       const response = await service.post("/admin/product", addProduct);
       console.log(response);
       products();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      navigate("/error");
     }
-    console.log(addProduct);
     setName("");
     setDescription("");
-
     setPrice(0);
     setIngredient("");
   };
 
-  /* const hadleRadioAll = (e) => {
-    console.log(e.target.value);
-  };
-  const hadleRadioPizza = (e) => {
-    console.log(e.target.value);
-  };
-  const hadleRadioPasta = (e) => {
-    console.log(e.target.value);
-  };
-  const hadleRadioEnsalada = (e) => {
-    console.log(e.target.value);
-  };
-  const hadleRadioPostre = (e) => {
-    console.log(e.target.value);
-  };
-  const hadleRadioBebida = (e) => {
-    console.log(e.target.value);
-  }; */
   const handleChange = (e) => {
     setValueRadio(e.target.value);
-
-    console.log(e.target.value);
   };
 
   return (
@@ -124,7 +102,6 @@ export const Product = () => {
         paddingInline={10}
         marginBlock={5}
         component="form"
-        /* onSubmit={handleSubmit} */
       >
         <Grid container spacing={0}>
           <Grid2
@@ -140,6 +117,17 @@ export const Product = () => {
               fullWidth
               value={name}
               onChange={(e) => setName(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
+              inputProps={{
+                autoComplete: "new-password",
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
             />
           </Grid2>
           <Grid2
@@ -155,6 +143,17 @@ export const Product = () => {
               fullWidth
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
+              inputProps={{
+                autoComplete: "new-password",
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
             />
           </Grid2>
           <Grid2
@@ -169,6 +168,17 @@ export const Product = () => {
               fullWidth
               value={ingredient}
               onChange={(e) => setIngredient(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
+              inputProps={{
+                autoComplete: "new-password",
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
             />
           </Grid2>
           <Grid2
@@ -177,19 +187,75 @@ export const Product = () => {
             sx={{ backgroundColor: "white", padding: "10px 5px" }}
           >
             <FormControl fullWidth>
-              <InputLabel id="categoria">Categoría</InputLabel>
+              <InputLabel
+                id="categoria"
+                sx={{
+                  fontFamily: "signika",
+                }}
+              >
+                Categoría
+              </InputLabel>
               <Select
+                sx={{
+                  fontFamily: "signika",
+                }}
                 labelId="Categoría"
                 id="categoria"
                 label="Categoría"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    fontFamily: "Signika",
+                  },
+                }}
+                inputProps={{
+                  autoComplete: "new-password",
+                  sx: {
+                    fontFamily: "Signika",
+                  },
+                }}
               >
-                <MenuItem value={"pizza"}>Pizza</MenuItem>
-                <MenuItem value={"pasta"}>Pasta</MenuItem>
-                <MenuItem value={"ensalada"}>Ensalada</MenuItem>
-                <MenuItem value={"postre"}>Postre</MenuItem>
-                <MenuItem value={"bebida"}>Bebida</MenuItem>
+                <MenuItem
+                  sx={{
+                    fontFamily: "signika",
+                  }}
+                  value={"pizza"}
+                >
+                  Pizza
+                </MenuItem>
+                <MenuItem
+                  sx={{
+                    fontFamily: "signika",
+                  }}
+                  value={"pasta"}
+                >
+                  Pasta
+                </MenuItem>
+                <MenuItem
+                  sx={{
+                    fontFamily: "signika",
+                  }}
+                  value={"ensalada"}
+                >
+                  Ensalada
+                </MenuItem>
+                <MenuItem
+                  sx={{
+                    fontFamily: "signika",
+                  }}
+                  value={"postre"}
+                >
+                  Postre
+                </MenuItem>
+                <MenuItem
+                  sx={{
+                    fontFamily: "signika",
+                  }}
+                  value={"bebida"}
+                >
+                  Bebida
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid2>
@@ -204,6 +270,17 @@ export const Product = () => {
               variant="outlined"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
+              inputProps={{
+                autoComplete: "new-password",
+                sx: {
+                  fontFamily: "Signika",
+                },
+              }}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -213,7 +290,6 @@ export const Product = () => {
               }}
             />
           </Grid2>
-
           <Grid2
             item
             size={1}
@@ -277,65 +353,71 @@ export const Product = () => {
           </RadioGroup>
         </FormControl>
       </Box>
-      {/*  <div className="radio-product">
-        <div className="radioProduct-produc">
-          <Radio value="todos" color="success" onChange={hadleRadioAll} />
-          <p>Todos</p>
-        </div>
-        <div className="radioProduct-produc">
-          <Radio value="pizza" color="success" onChange={hadleRadioPizza} />
-          <p>Pizza</p>
-        </div>
-        <div className="radioProduct-produc">
-          <Radio value="pasta" color="success" onChange={hadleRadioPasta} />
-          <p>Pasta</p>
-        </div>
-        <div className="radioProduct-produc">
-          <Radio
-            value="ensalada"
-            color="success"
-            onChange={hadleRadioEnsalada}
-          />
-          <p>Ensalada</p>
-        </div>
-        <div className="radioProduct-produc">
-          <Radio value="postre" color="success" onChange={hadleRadioPostre} />
-          <p>Postre</p>
-        </div>
-        <div className="radioProduct-produc">
-          <Radio value="bebida" color="success" onChange={hadleRadioBebida} />
-          <p>Bebida</p>
-        </div>
-      </div> */}
       <Box sx={{ flexGrow: 1 }} paddingInline={10}>
         <Grid container spacing={0}>
           <Grid item size={2}>
-            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+            <Item
+              sx={{
+                backgroundColor: "GrayText",
+                color: "white",
+                fontFamily: "Signika",
+              }}
+            >
               Nombre
             </Item>
           </Grid>
           <Grid item size={3}>
-            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+            <Item
+              sx={{
+                backgroundColor: "GrayText",
+                color: "white",
+                fontFamily: "Signika",
+              }}
+            >
               Descripción
             </Item>
           </Grid>
           <Grid item size={3}>
-            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+            <Item
+              sx={{
+                backgroundColor: "GrayText",
+                color: "white",
+                fontFamily: "Signika",
+              }}
+            >
               Ingredientes
             </Item>
           </Grid>
           <Grid item size={1}>
-            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+            <Item
+              sx={{
+                backgroundColor: "GrayText",
+                color: "white",
+                fontFamily: "Signika",
+              }}
+            >
               Cat.
             </Item>
           </Grid>
           <Grid item size={1}>
-            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+            <Item
+              sx={{
+                backgroundColor: "GrayText",
+                color: "white",
+                fontFamily: "Signika",
+              }}
+            >
               Precio
             </Item>
           </Grid>
           <Grid item size={2}>
-            <Item sx={{ backgroundColor: "GrayText", color: "white" }}>
+            <Item
+              sx={{
+                backgroundColor: "GrayText",
+                color: "white",
+                fontFamily: "Signika",
+              }}
+            >
               Eliminar
             </Item>
           </Grid>
@@ -353,19 +435,49 @@ export const Product = () => {
               >
                 <Grid container spacing={0}>
                   <Grid item size={2}>
-                    <Item>{elem.title}</Item>
+                    <Item
+                      sx={{
+                        fontFamily: "Signika",
+                      }}
+                    >
+                      {elem.title}
+                    </Item>
                   </Grid>
                   <Grid item size={3}>
-                    <Item>{elem.description}</Item>
+                    <Item
+                      sx={{
+                        fontFamily: "Signika",
+                      }}
+                    >
+                      {elem.description}
+                    </Item>
                   </Grid>
                   <Grid item size={3}>
-                    <Item>{elem.ingredients}</Item>
+                    <Item
+                      sx={{
+                        fontFamily: "Signika",
+                      }}
+                    >
+                      {elem.ingredients}
+                    </Item>
                   </Grid>
                   <Grid item size={1}>
-                    <Item>{elem.category}</Item>
+                    <Item
+                      sx={{
+                        fontFamily: "Signika",
+                      }}
+                    >
+                      {elem.category}
+                    </Item>
                   </Grid>
                   <Grid item size={1}>
-                    <Item>{elem.price}€</Item>
+                    <Item
+                      sx={{
+                        fontFamily: "Signika",
+                      }}
+                    >
+                      {elem.price}€
+                    </Item>
                   </Grid>
                   <Grid item size={2}>
                     <Item>
@@ -382,7 +494,6 @@ export const Product = () => {
             );
           })}{" "}
       </div>{" "}
-      {/* <Footer /> */}
     </div>
   );
 };

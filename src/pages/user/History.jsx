@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Slider from "react-slick";
 import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config";
 import "./style-History.css";
+import { useContext, useEffect, useState } from "react";
+import ClockLoader from "react-spinners/ClockLoader";
 
 export const History = () => {
   const [ordesData, setOrdesData] = useState();
@@ -24,9 +24,8 @@ export const History = () => {
   };
 
   if (!ordesData) {
-    return <h3>loading...</h3>;
+    return <ClockLoader size={200} />;
   }
-  console.log(ordesData);
 
   return (
     <div className="container-history">

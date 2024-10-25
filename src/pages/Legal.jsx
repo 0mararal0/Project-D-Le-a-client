@@ -1,6 +1,5 @@
 import "./style-Legal.css";
 import Container from "@mui/material/Container";
-import { Footer } from "../components/footer/Footer";
 
 export const Legal = () => {
   return (
